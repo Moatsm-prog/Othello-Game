@@ -1,0 +1,7 @@
+othello.pro.*
+.vscode/
+.idea/
+*.autosave
+*.exe
+build-othello-*
+obj/

@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/imgs">
+        <file>imgs/othello_bg_half_trans.png</file>
+    </qresource>
+    <qresource prefix="/icons48x48">
+        <file>icons/48x48/quit_ico.png</file>
+        <file>icons/48x48/restart_ico.png</file>
+        <file>icons/48x48/settings_ico.png</file>
+        <file>icons/48x48/start_game_ico.png</file>
+        <file>icons/48x48/arrow_back_ico.png</file>
+        <file>icons/48x48/dots_ico.png</file>
+        <file>icons/48x48/minimize_ico.png</file>
+    </qresource>
+</RCC>
