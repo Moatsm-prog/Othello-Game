@@ -23,7 +23,8 @@ private:
         {1, 0},   // bottom
         {1, 1}    // bottom right
     };
-    bool isCapturable(int playerInTurn, int x, int y);
+    bool isOpponent(int playerInTurn, int x, int y);
+    bool isCapturable(int playerInTurn, int x, int y, int direction);
     bool isValid(int x, int y);
     void captureInDirection(int playerInTurn, int x, int y, int direction);
     std::ofstream log;

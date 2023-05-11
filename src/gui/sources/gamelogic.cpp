@@ -24,7 +24,7 @@ void GameLogic::update(int playerInTurn, int xPosition, int yPosition)
     {
         int x = xPosition + directions[i][0];
         int y = yPosition + directions[i][1];
-        if (isCapturable(playerInTurn, x, y))
+        if (isOpponent(playerInTurn, x, y))
         {
             log << "\tTrying to capture in direction " << i << std::endl;
             captureInDirection(playerInTurn, x, y, i);
@@ -32,7 +32,7 @@ void GameLogic::update(int playerInTurn, int xPosition, int yPosition)
     }
 }
 
-bool GameLogic::isCapturable(int playerInTurn, int x, int y)
+bool GameLogic::isOpponent(int playerInTurn, int x, int y)
 {
     return isValid(x, y)                    // check if the cell is not out of bounds
            && board[x][y] == !playerInTurn; // check if the cell is the opposite color
@@ -69,8 +69,71 @@ void GameLogic::captureInDirection(int playerInTurn, int x, int y, int direction
         y += directions[direction][1];
     }
 }
+
+std::vector<std::pair<int, int>> GameLogic::getAvailableMoves(int playerInTurn)
+{
+    std::vector<std::pair<int, int>> availableMoves;
+    // check for all cells
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            // if the cell is empty, check if it's a valid move
+            if (board[i][j] == EMPTY)
+            {
+                // check for all directions
+                for (int direction = 0; direction < 8; direction++)
+                {
+                    if (isCapturable(playerInTurn, i, j, direction))
+                    {
+                        availableMoves.push_back(std::pair<int, int>(i, j));
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    log << "Available moves: " << availableMoves.size() << std::endl;
+    for (int i = 0; i < availableMoves.size(); i++)
+    {
+        log << "\t" << availableMoves[i].first << "," << availableMoves[i].second << std::endl;
+    }
+    return availableMoves;
+}
+
+bool GameLogic::isCapturable(int playerInTurn, int x, int y, int direction)
+{
+    int count = 0;
+    while (true)
+    {
+        x += directions[direction][0];
+        y += directions[direction][1];
+        if (!isValid(x, y) || board[x][y] == EMPTY)
+            return false;
+        if (board[x][y] == playerInTurn)
+            return count;
+        count++;
+    }
+}
+
+std::vector<std::pair<int, int>> GameLogic::getPlayerPositions(int playerInTurn)
+{
+    return std::vector<std::pair<int, int>>();
+}
+
+std::pair<int, int> GameLogic::getScore()
+{
+    return std::pair<int, int>();
+}
+
+bool GameLogic::isGameOver()
+{
+    return false;
+}
+
 #include <iostream>
 #include <string>
+#include "gamelogic.h"
 // This function is used for debugging purposes, it will be removed once GUI is implemented
 void GameLogic::debug()
 {
@@ -136,17 +199,60 @@ int main(int argc, char const *argv[])
     game.debug();
     int WHITE = game.WHITE;
     int BLACK = game.BLACK;
-    // ostream for logging moves, will be removed once GUI is implemented
+    std::vector<std::pair<int, int>> availableMoves;
     while (true)
     {
         int x, y;
-        std::cin >> x >> y;
+        // get available moves
+        availableMoves = game.getAvailableMoves(BLACK);
+        for (int i = 0; i < availableMoves.size(); i++)
+        {
+            std::cout << i << ". " << availableMoves[i].first << ", " << availableMoves[i].second << std::endl;
+        }
+        while (std::cin >> x >> y)
+        {
+            // check if the move is valid
+            bool valid = false;
+            for (int i = 0; i < availableMoves.size(); i++)
+            {
+                if (availableMoves[i].first == x && availableMoves[i].second == y)
+                {
+                    valid = true;
+                    break;
+                }
+            }
+            if (!valid)
+                std::cout << "Invalid move" << std::endl;
+            else
+                break;
+        }
         game.update(BLACK, x, y);
         game.debug();
-        std::cin >> x >> y;
+        // get available moves
+        std::vector<std::pair<int, int>> availableMoves = game.getAvailableMoves(WHITE);
+        for (int i = 0; i < availableMoves.size(); i++)
+        {
+            std::cout << i << ". " << availableMoves[i].first << ", " << availableMoves[i].second << std::endl;
+        }
+        while (std::cin >> x >> y)
+        {
+            // check if the move is valid
+            bool valid = false;
+            for (int i = 0; i < availableMoves.size(); i++)
+            {
+                if (availableMoves[i].first == x && availableMoves[i].second == y)
+                {
+                    valid = true;
+                    break;
+                }
+            }
+            if (!valid)
+                std::cout << "Invalid move" << std::endl;
+            else
+                break;
+        }
         game.update(WHITE, x, y);
         game.debug();
     }
-    game.debug();
     return 0;
 }
