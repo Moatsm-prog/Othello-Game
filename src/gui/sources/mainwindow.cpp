@@ -77,7 +77,7 @@ void MainWindow::trigger_animation()
         ui->side_menu_back_btn->setText(" Main Menu");
         ui->side_menu_restart_btn->setText("  Restart   ");
         ui->side_menu_quit_btn->setText("  QUIT       ");
-        icon.addPixmap(QPixmap(":/icons48x48/resources/icons/48x48/minimize_ico.png"), QIcon::Normal, QIcon::Off);
+        icon.addPixmap(QPixmap(":/icons48x48/icons/48x48/minimize_ico.png"), QIcon::Normal, QIcon::Off);
     }
     else
     {
@@ -86,7 +86,7 @@ void MainWindow::trigger_animation()
         ui->side_menu_back_btn->setText("");
         ui->side_menu_restart_btn->setText("");
         ui->side_menu_quit_btn->setText("");
-        icon.addPixmap(QPixmap(":/icons48x48/resources/icons/48x48/dots_ico.png"), QIcon::Normal, QIcon::Off);
+        icon.addPixmap(QPixmap(":/icons48x48/icons/48x48/dots_ico.png"), QIcon::Normal, QIcon::Off);
     }
     ui->side_menu_toggle->setIcon(icon);
     set_animation(restart_btn_animation, cur_val, end_val, duration);
