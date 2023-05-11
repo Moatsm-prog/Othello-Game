@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 #include<QPropertyAnimation>
 #include<QParallelAnimationGroup>
-
+#include "gamelogic.h";
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -35,8 +35,7 @@ private:
     QPropertyAnimation *back_btn_animation;
     QPropertyAnimation *quit_btn_animation;
     QParallelAnimationGroup *group;
-
-
+    GameLogic* game_logic;
 
 private slots:
     void on_side_menu_toggle_clicked();
@@ -47,5 +46,6 @@ private slots:
     void on_side_menu_quit_btn_clicked();
     void on_side_menu_restart_btn_clicked();
     void on_side_menu_back_btn_clicked();
+    void on_optionButton_clicked();
 };
 #endif // MAINWINDOW_H

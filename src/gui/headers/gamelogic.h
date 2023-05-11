@@ -5,6 +5,9 @@
 #include <utility>
 #include <fstream>
 
+enum GameMode{HumanvsHuman , HumanvsComputer , ComputervsComputer};
+enum GameDifficulty{Esay , Medium , Diffuclut};
+
 class GameLogic
 {
 private:
@@ -28,7 +31,7 @@ private:
     bool isValid(int x, int y);
     void captureInDirection(int playerInTurn, int x, int y, int direction);
     std::ofstream log;
-
+    
 public:
     static const int EMPTY = -1;
     static const int WHITE = 0;
@@ -40,6 +43,8 @@ public:
     std::pair<int, int> getScore();
     bool isGameOver();
     void debug();
+    void setGameDifficultyLevel(GameDifficulty difficultLevel);
+    void setGameMode(GameMode gameMode);
 };
 
 #endif // GAMELOGIC_H

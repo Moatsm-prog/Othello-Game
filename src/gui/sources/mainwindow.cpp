@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentWidget(ui->main_menu_page);
+    game_logic = new GameLogic();
 }
 
 // destructor
@@ -26,6 +27,7 @@ MainWindow::~MainWindow()
     delete restart_btn_animation;
     delete back_btn_animation;
     delete quit_btn_animation;
+    delete game_logic;
     clear_table();
 }
 
@@ -243,7 +245,7 @@ void MainWindow::prompt_for_quit()
 void MainWindow::on_main_menu_options_btn_clicked()
 {
     // TODO: add the options widget, then remove this comment;
-    // ui->stackedWidget->setCurrentWidget(ui->options_page);
+     ui->stackedWidget->setCurrentWidget(ui->options_page);
 }
 
 void MainWindow::on_main_menu_quit_btn_clicked()
@@ -283,3 +285,41 @@ void MainWindow::on_side_menu_back_btn_clicked()
         return;
     }
 }
+
+void MainWindow::on_optionButton_clicked()
+{
+    GameMode game_mode = GameMode::ComputervsComputer;
+    GameDifficulty game_difficulty = GameDifficulty::Esay;
+
+    /*Game Options*/
+    if(ui->ai_ai_option->isChecked())
+    {
+        game_mode = GameMode::ComputervsComputer;
+    }
+    else if(ui->human_ai_option->isChecked())
+    {
+        game_mode = GameMode::HumanvsComputer;
+    }
+    else if(ui->human_human_option->isChecked())
+    {
+        game_mode = GameMode::HumanvsHuman;
+    }
+    /*Game Difficult Code*/
+    if(ui->easy_option->isChecked())
+    {
+        game_difficulty = GameDifficulty::Esay;
+    }
+    else if(ui->medium_option->isChecked())
+    {
+        game_difficulty = GameDifficulty::Medium;
+    }
+    else if(ui->hard_option->isChecked())
+    {
+        game_difficulty = GameDifficulty::Diffuclut;
+    }
+
+    game_logic->setGameDifficultyLevel(game_difficulty);
+    game_logic->setGameMode(game_mode);
+}
+
+
