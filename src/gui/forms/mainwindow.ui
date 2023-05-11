@@ -721,7 +721,109 @@ QTableWidget::item:selected{
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="options_page"/>
+      <widget class="QWidget" name="options_page">
+       <property name="styleSheet">
+        <string notr="true">/*PushButton*/
+QPushButton {
+	border: 2px solid rgb(52, 59, 72);
+	background-color: rgb(52, 59, 72);
+	color: rgb(223, 223, 223);
+	border-radius: 25px;
+}
+QPushButton:hover {
+	background-color: rgb(57, 65, 80);
+	border: 2px solid rgb(61, 70, 86);
+}
+QPushButton:pressed {	
+	background-color: rgb(35, 40, 49);
+	border: 2px solid rgb(43, 50, 61);
+}
+</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
+         <widget class="QFrame" name="main_page_frame">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="1" column="0">
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <item>
+                <widget class="QGroupBox" name="groupBox_2">
+                 <property name="title">
+                  <string>Choose Dificalty level: </string>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_10">
+                  <item>
+                   <widget class="QRadioButton" name="easy_option">
+                    <property name="text">
+                     <string>Easy</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="medium_option">
+                    <property name="text">
+                     <string>Medium</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="hard_option">
+                    <property name="text">
+                     <string>Hard</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="0" column="0">
+              <layout class="QVBoxLayout" name="verticalLayout_5">
+               <item>
+                <widget class="QGroupBox" name="groupBox">
+                 <property name="title">
+                  <string>Game Mode:</string>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_9">
+                  <item>
+                   <widget class="QRadioButton" name="ai_ai_option">
+                    <property name="text">
+                     <string>AI Vs AI</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="human_ai_option">
+                    <property name="text">
+                     <string>Human Vs AI</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="human_human_option">
+                    <property name="text">
+                     <string>Human Vs Human</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
