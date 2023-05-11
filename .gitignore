@@ -5,3 +5,4 @@ othello.pro.*
 *.exe
 build-othello-*
 obj/
+log.txt
