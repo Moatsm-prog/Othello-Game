@@ -36,7 +36,9 @@ private:
     QParallelAnimationGroup *group;
     GameLogic* game_logic;
 
+    void drawAvailableMoves();
     void drawPlayerPosition();
+    void updateScore();
 
 private slots:
     void on_side_menu_toggle_clicked();

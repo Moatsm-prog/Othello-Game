@@ -50,6 +50,20 @@ void MainWindow::on_board_table_widget_cellClicked(int row, int column)
     {
         ui->board_table_widget->removeCellWidget(row, column);
         draw(this->turn, row, column);
+        drawAvailableMoves();
+        set_turn_label(!this->turn);
+        updateScore();
+        if(game_logic->isGameOver()) {
+            QMessageBox msgBox;
+            msgBox.setText("Game Over");
+            msgBox.setInformativeText("Do you want to quit ?");
+            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+            msgBox.setDefaultButton(QMessageBox::Yes);
+            int ret = msgBox.exec();
+            if(ret == QMessageBox::Yes) {
+                QApplication::quit();
+            }
+        }
     }
 }
 
@@ -134,10 +148,12 @@ void MainWindow::draw(int type, int x, int y)
     if (type == BLACK)
     {
         piece = BLACK_PIECE;
+        game_logic->update(type, x, y);
     }
     else if (type == WHITE)
     {
         piece = WHITE_PIECE;
+        game_logic->update(type, x, y);
     }
     else if (type == INDICATOR)
     {
@@ -189,6 +205,7 @@ void MainWindow::draw_initial_pieces()
     draw(BLACK, 4, 3);
     draw(WHITE, 3, 3);
     draw(WHITE, 4, 4);
+    drawAvailableMoves();
 }
 
 // breif: set_black_score method responsible for setting the black player score on the UI.
@@ -212,12 +229,13 @@ void MainWindow::set_turn_label(int turn)
 {
     if (turn == BLACK)
         ui->turn_label->setText("Black");
-    else if (turn == WHITE)    
+    else if (turn == WHITE)
         ui->turn_label->setText("White");
     else
     {
         // qDebug()<<"type not supproted, pass either 1 for black or 0 for white.";
     }
+    this->turn = !this->turn;
 }
 
 // The following methods are realted to menu buttons behaviour
@@ -336,3 +354,16 @@ void MainWindow::drawPlayerPosition() {
     }
 }
 
+
+void MainWindow::drawAvailableMoves() {
+    std::vector<std::pair<int, int>> moves = game_logic->getAvailableMoves(this->turn);
+    for(std::pair<int, int> move : moves) {
+        draw(INDICATOR, move.first, move.second);
+    }
+}
+
+void MainWindow::updateScore() {
+    std::pair<int, int> score = game_logic->getScore();
+    set_black_score(score.second);
+    set_white_score(score.first);
+}
