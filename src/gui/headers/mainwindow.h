@@ -27,8 +27,7 @@ public:
     void set_black_score(int score);
     void set_white_score(int score);
     void set_turn_label(int turn);
-    void prompt_for_quit();
-
+    void prompt_for_quit(); 
 private:
     QPropertyAnimation *side_menu_animation;
     QPropertyAnimation *restart_btn_animation;
@@ -36,6 +35,8 @@ private:
     QPropertyAnimation *quit_btn_animation;
     QParallelAnimationGroup *group;
     GameLogic* game_logic;
+
+    void drawPlayerPosition();
 
 private slots:
     void on_side_menu_toggle_clicked();

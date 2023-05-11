@@ -212,7 +212,7 @@ void MainWindow::set_turn_label(int turn)
 {
     if (turn == BLACK)
         ui->turn_label->setText("Black");
-    else if (turn == WHITE)
+    else if (turn == WHITE)    
         ui->turn_label->setText("White");
     else
     {
@@ -322,4 +322,17 @@ void MainWindow::on_optionButton_clicked()
     game_logic->setGameMode(game_mode);
 }
 
+
+void MainWindow::drawPlayerPosition() {
+    clear_table();
+    std::vector<std::pair<int, int>> black_moves = game_logic->getPlayerPositions(BLACK);
+    std::vector<std::pair<int, int>> white_moves = game_logic->getPlayerPositions(WHITE);
+    for(std::pair<int, int> move : black_moves) {
+        draw(BLACK, move.first, move.second);
+    }
+
+    for(std::pair<int, int> move : white_moves) {
+        draw(WHITE, move.first, move.second);
+    }
+}
 
