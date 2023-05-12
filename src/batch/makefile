@@ -1,9 +1,9 @@
 CC = g++
 CFLAGS = -Wall -std=c++11 -g
-INCLUDES = -I./headers
-SRCDIR = sources
+INCLUDES = -I./gui/headers
+SRCDIR = gui/sources
 OBJDIR = obj
-SOURCES = $(SRCDIR)/gamelogic.cpp
+SOURCES = $(SRCDIR)/gamelogic.cpp batch.cpp
 OBJECTS = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SOURCES))
 
 all: game
