@@ -1,7 +1,7 @@
 #include "Heuristic.h"
 
 class CornerCapture : public Heuristic {
-    int evaluate(const std::vector<std::vector<int>>& board, int player);
+    int evaluate(const std::vector<std::vector<int>>& board);
 
     private:
     const int BLACK = -1;
