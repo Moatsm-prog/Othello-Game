@@ -11,14 +11,18 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     sources/animatedradiobutton.cpp \
+    sources/game_page_animation_handler.cpp \
     sources/mainwindow.cpp \
-    sources/gamelogic.cpp
+    sources/gamelogic.cpp \
+    sources/ui_game_handler.cpp
 
 HEADERS += \
     headers/animatedradiobutton.h \
+    headers/game_page_animation_handler.h \
     headers/mainwindow.h \
     headers/macros.h \
-    headers/gamelogic.h
+    headers/gamelogic.h \
+    headers/ui_game_handler.h
 
 FORMS += \
     forms/mainwindow.ui

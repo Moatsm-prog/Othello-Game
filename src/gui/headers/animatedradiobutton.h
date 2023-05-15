@@ -13,6 +13,7 @@ class AnimatedRadioButton: public QRadioButton
 
 public:
     AnimatedRadioButton(QWidget *parent = nullptr);
+    ~AnimatedRadioButton();
     float circlePosition() const;
     void setCirclePosition(float pos);
     void start_transition(int value);

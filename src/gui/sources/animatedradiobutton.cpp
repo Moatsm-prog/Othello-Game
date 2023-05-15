@@ -23,6 +23,10 @@ AnimatedRadioButton::AnimatedRadioButton(QWidget *parent): QRadioButton(parent)
     connect(this, &AnimatedRadioButton::toggled, this, &AnimatedRadioButton::start_transition);
 }
 
+AnimatedRadioButton::~AnimatedRadioButton(){
+    delete this->animation;
+}
+
 float AnimatedRadioButton::circlePosition() const {
     return m_circlePosition;
 }
