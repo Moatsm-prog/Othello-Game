@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 #include<QPropertyAnimation>
 #include<QParallelAnimationGroup>
-#include "gamelogic.h";
+#include "gamelogic.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -50,5 +50,6 @@ private slots:
     void on_side_menu_restart_btn_clicked();
     void on_side_menu_back_btn_clicked();
     void on_optionButton_clicked();
+    void on_back_options_btn_clicked();
 };
 #endif // MAINWINDOW_H

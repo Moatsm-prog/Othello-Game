@@ -10,10 +10,12 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
+    sources/animatedradiobutton.cpp \
     sources/mainwindow.cpp \
     sources/gamelogic.cpp
 
 HEADERS += \
+    headers/animatedradiobutton.h \
     headers/mainwindow.h \
     headers/macros.h \
     headers/gamelogic.h

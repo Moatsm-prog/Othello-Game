@@ -10,5 +10,8 @@
         <file>icons/48x48/arrow_back_ico.png</file>
         <file>icons/48x48/dots_ico.png</file>
         <file>icons/48x48/minimize_ico.png</file>
+        <file>icons/48x48/cancel_ico.png</file>
+        <file>icons/48x48/done_ico.png</file>
+        <file>icons/48x48/restore_ico.png</file>
     </qresource>
 </RCC>

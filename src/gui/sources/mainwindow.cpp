@@ -306,38 +306,38 @@ void MainWindow::on_side_menu_back_btn_clicked()
 
 void MainWindow::on_optionButton_clicked()
 {
-    GameMode game_mode = GameMode::ComputervsComputer;
-    GameDifficulty game_difficulty = GameDifficulty::Esay;
+//    GameMode game_mode = GameMode::ComputervsComputer;
+//    GameDifficulty game_difficulty = GameDifficulty::Esay;
 
-    /*Game Options*/
-    if(ui->ai_ai_option->isChecked())
-    {
-        game_mode = GameMode::ComputervsComputer;
-    }
-    else if(ui->human_ai_option->isChecked())
-    {
-        game_mode = GameMode::HumanvsComputer;
-    }
-    else if(ui->human_human_option->isChecked())
-    {
-        game_mode = GameMode::HumanvsHuman;
-    }
-    /*Game Difficult Code*/
-    if(ui->easy_option->isChecked())
-    {
-        game_difficulty = GameDifficulty::Esay;
-    }
-    else if(ui->medium_option->isChecked())
-    {
-        game_difficulty = GameDifficulty::Medium;
-    }
-    else if(ui->hard_option->isChecked())
-    {
-        game_difficulty = GameDifficulty::Diffuclut;
-    }
+//    /*Game Options*/
+//    if(ui->ai_ai_option->isChecked())
+//    {
+//        game_mode = GameMode::ComputervsComputer;
+//    }
+//    else if(ui->human_ai_option->isChecked())
+//    {
+//        game_mode = GameMode::HumanvsComputer;
+//    }
+//    else if(ui->human_human_option->isChecked())
+//    {
+//        game_mode = GameMode::HumanvsHuman;
+//    }
+//    /*Game Difficult Code*/
+//    if(ui->easy_option->isChecked())
+//    {
+//        game_difficulty = GameDifficulty::Esay;
+//    }
+//    else if(ui->medium_option->isChecked())
+//    {
+//        game_difficulty = GameDifficulty::Medium;
+//    }
+//    else if(ui->hard_option->isChecked())
+//    {
+//        game_difficulty = GameDifficulty::Diffuclut;
+//    }
 
-    game_logic->setGameDifficultyLevel(game_difficulty);
-    game_logic->setGameMode(game_mode);
+//    game_logic->setGameDifficultyLevel(game_difficulty);
+//    game_logic->setGameMode(game_mode);
 }
 
 
@@ -367,3 +367,9 @@ void MainWindow::updateScore() {
     set_black_score(score.second);
     set_white_score(score.first);
 }
+
+void MainWindow::on_back_options_btn_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->main_menu_page);
+}
+
