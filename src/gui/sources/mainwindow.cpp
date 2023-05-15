@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->set_up_ost();
+    this->setWindowTitle("The Othello");
     ui->stackedWidget->setCurrentWidget(ui->main_menu_page);
     game_logic = new GameLogic();
     menu_animation_handler = new MenuAnimationHandler(this);
@@ -24,6 +26,18 @@ MainWindow::~MainWindow()
     delete game_logic;
     delete this->menu_animation_handler;
     delete this->ui_game_handler;
+    delete this->media_player;
+    delete this->playlist;
+}
+
+void MainWindow::set_up_ost(){
+    playlist = new QMediaPlaylist();
+    playlist->addMedia(QUrl("qrc:/sounds/sound_tracks/ost.mp3"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
+    media_player = new QMediaPlayer();
+    media_player->setPlaylist(playlist);
+    media_player->setVolume(100);
+    media_player->play();
 }
 
 void MainWindow::prompt_for_quit()
@@ -184,3 +198,16 @@ void MainWindow::updateScore() {
     ui_game_handler->set_black_score(score.second);
     ui_game_handler->set_white_score(score.first);
 }
+
+void MainWindow::on_side_menu_sound_btn_clicked()
+{
+    QIcon icon = QIcon();
+    if (this->media_player->isMuted())
+        icon.addPixmap(QPixmap(":/icons48x48/icons/48x48/volume_off.png"), QIcon::Normal, QIcon::Off);
+    else
+        icon.addPixmap(QPixmap(":/icons48x48/icons/48x48/volumne_on.png"), QIcon::Normal, QIcon::Off);
+
+    this->ui->side_menu_sound_btn->setIcon(icon);
+    media_player->setMuted(!media_player->isMuted());
+}
+

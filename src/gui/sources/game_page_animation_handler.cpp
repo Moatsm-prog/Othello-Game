@@ -11,6 +11,7 @@ MenuAnimationHandler::~MenuAnimationHandler(){
     delete this->restart_btn_animation;
     delete this->back_btn_animation;
     delete this->quit_btn_animation;
+    delete this->sound_btn_animation;
     delete this->group;
 };
 
@@ -20,6 +21,7 @@ void MenuAnimationHandler::trigger_animation(){
     back_btn_animation = new QPropertyAnimation(main_window->ui->side_menu_back_btn, "minimumWidth");
     restart_btn_animation = new QPropertyAnimation(main_window->ui->side_menu_restart_btn, "minimumWidth");
     quit_btn_animation = new QPropertyAnimation(main_window->ui->side_menu_quit_btn, "minimumWidth");
+    sound_btn_animation = new QPropertyAnimation(main_window->ui->side_menu_sound_btn, "minimumWidth");
     //getting the current values for the buttons and side menu frame width
     int cur_val = main_window->ui->side_menu_quit_btn->width();
     int side_menu_cur_val = main_window->ui->side_menu_frame->width();
@@ -36,6 +38,7 @@ void MenuAnimationHandler::trigger_animation(){
         main_window->ui->side_menu_back_btn->setText(" Main Menu");
         main_window->ui->side_menu_restart_btn->setText("  Restart   ");
         main_window->ui->side_menu_quit_btn->setText("  QUIT       ");
+        main_window->ui->side_menu_sound_btn->setText(" (UN)MUTE");
         icon.addPixmap(QPixmap(":/icons48x48/icons/48x48/minimize_ico.png"), QIcon::Normal, QIcon::Off);
     }
     else
@@ -47,6 +50,7 @@ void MenuAnimationHandler::trigger_animation(){
         main_window->ui->side_menu_back_btn->setText("");
         main_window->ui->side_menu_restart_btn->setText("");
         main_window->ui->side_menu_quit_btn->setText("");
+        main_window->ui->side_menu_sound_btn->setText("");
         //change toggle icon
         icon.addPixmap(QPixmap(":/icons48x48/icons/48x48/dots_ico.png"), QIcon::Normal, QIcon::Off);
     }

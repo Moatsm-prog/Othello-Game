@@ -4,6 +4,9 @@
 #include<QParallelAnimationGroup>
 #include "gamelogic.h"
 #include <QMainWindow>
+#include <QMediaPlaylist>
+#include <QMediaPlayer>
+
 
 //forward declaration of class MenuAnimationHandler
 class MenuAnimationHandler;
@@ -24,7 +27,7 @@ public:
     //input parent: pointer to the parent widget used to display the main window.
     MainWindow(QWidget *parent = nullptr);
 
-    //bried: destructor of the class resposible for deleting the class components.
+    //bried: destructor of the class resposible for deleting the class components, media player, and playlist.
     ~MainWindow();
 
     void drawAvailableMoves();
@@ -43,6 +46,15 @@ private:
 
     //pointer to the ui game handler responsible for handling changes that occur to the ui due to game changes
     UiGameHandler *ui_game_handler;
+
+    //pointer to the playlist containing the OST of the game
+    QMediaPlaylist *playlist;
+
+    //pointer to the game media player responsible for playing its sound effects
+    QMediaPlayer *media_player;
+
+    //brief: setting up the game media player and playing the OST in the background
+    void set_up_ost();
 
     void drawPlayerPosition();
 
@@ -85,5 +97,8 @@ private slots:
 
     // breif: on_back_options_btn_clicked slot responsible for taking the user from options menu to main menu.
     void on_back_options_btn_clicked();
+
+    // breif: on_side_menu_sound_btn_clicked slot responsible for muting/unmuting game background music.
+    void on_side_menu_sound_btn_clicked();
 };
 #endif // MAINWINDOW_H

@@ -13,5 +13,10 @@
         <file>icons/48x48/cancel_ico.png</file>
         <file>icons/48x48/done_ico.png</file>
         <file>icons/48x48/restore_ico.png</file>
+        <file>icons/48x48/volume_off.png</file>
+        <file>icons/48x48/volumne_on.png</file>
+    </qresource>
+    <qresource prefix="/sounds">
+        <file>sound_tracks/ost.mp3</file>
     </qresource>
 </RCC>

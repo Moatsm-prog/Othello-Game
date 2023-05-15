@@ -21,6 +21,7 @@ private:
     QPropertyAnimation *restart_btn_animation;
     QPropertyAnimation *back_btn_animation;
     QPropertyAnimation *quit_btn_animation;
+    QPropertyAnimation *sound_btn_animation;
     //the animation group responsible for triggering all previous animations at the same time
     QParallelAnimationGroup *group;
 

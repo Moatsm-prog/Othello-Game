@@ -64,7 +64,7 @@
 </string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="main_menu_page">
        <property name="styleSheet">
@@ -256,12 +256,45 @@ QFrame{
                   <height>50</height>
                  </size>
                 </property>
+                <property name="font">
+                 <font>
+                  <bold>true</bold>
+                 </font>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
                 <property name="icon">
                  <iconset resource="../resources/resources.qrc">
                   <normaloff>:/icons48x48/icons/48x48/dots_ico.png</normaloff>:/icons48x48/icons/48x48/dots_ico.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="side_menu_sound_btn">
+                <property name="minimumSize">
+                 <size>
+                  <width>50</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="../resources/resources.qrc">
+                  <normaloff>:/icons48x48/icons/48x48/volume_off.png</normaloff>:/icons48x48/icons/48x48/volume_off.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
