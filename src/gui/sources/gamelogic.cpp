@@ -2,6 +2,20 @@
 
 GameLogic::GameLogic()
 {
+    initBoard();
+    initLogger();
+}
+
+GameLogic::GameLogic(Player *blackPlayer, Player *whitePlayer)
+{
+    this->blackPlayer = blackPlayer;
+    this->whitePlayer = whitePlayer;
+    initBoard();
+    initLogger();
+}
+
+void GameLogic::initBoard()
+{
     for (int i = 0; i < 8; i++)
         for (int j = 0; j < 8; j++)
             board[i][j] = EMPTY;
@@ -9,8 +23,15 @@ GameLogic::GameLogic()
     board[3][4] = BLACK;
     board[4][3] = BLACK;
     board[4][4] = WHITE;
+}
+
+void GameLogic::initLogger()
+{
     // Init log file, it will be used for debugging purposes.
     // It's opened in append mode to not be overwritten every time the program is run
+    // if it is open, return
+    if (log.is_open())
+        return;
     log.open("log.txt", std::ios_base::app);
     log << "**********\nNew game:" << std::endl;
 }
@@ -147,6 +168,12 @@ std::pair<int, int> GameLogic::getScore()
 bool GameLogic::isGameOver()
 {
     return getAvailableMoves(WHITE).empty() && getAvailableMoves(BLACK).empty();
+}
+
+void GameLogic::reset()
+{
+    initBoard();
+    log << "Resetting the board" << std::endl;
 }
 
 // Any functions below this comment are used for batch testing

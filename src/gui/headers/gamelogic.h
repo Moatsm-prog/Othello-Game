@@ -4,9 +4,7 @@
 #include <vector>
 #include <utility>
 #include <fstream>
-
-enum GameMode{HumanvsHuman , HumanvsComputer , ComputervsComputer};
-enum GameDifficulty{Esay , Medium , Diffuclut};
+#include "player.h"
 
 class GameLogic
 {
@@ -31,20 +29,24 @@ private:
     bool isValid(int x, int y);
     void captureInDirection(int playerInTurn, int x, int y, int direction);
     std::ofstream log;
-    
+    Player *blackPlayer;
+    Player *whitePlayer;
+
 public:
     static const int EMPTY = -1;
     static const int WHITE = 0;
     static const int BLACK = 1;
     GameLogic();
+    GameLogic(Player *black, Player *white);
+    void initBoard();
+    void initLogger();
     void update(int playerInTurn, int xPosition, int yPosition);
     std::vector<std::pair<int, int>> getAvailableMoves(int playerInTurn);
     std::vector<std::pair<int, int>> getPlayerPositions(int playerInTurn);
     std::pair<int, int> getScore();
     bool isGameOver();
     void debug();
-    void setGameDifficultyLevel(GameDifficulty difficultLevel);
-    void setGameMode(GameMode gameMode);
+    void reset();
 };
 
 #endif // GAMELOGIC_H
