@@ -1,4 +1,4 @@
-s#ifndef _CORNER_CAPTURE_
+#ifndef _CORNER_CAPTURE_
 #define _CORNER_CAPTURE_
 
 #include "Heuristic.h"
