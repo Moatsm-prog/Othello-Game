@@ -1,11 +1,12 @@
 #include "CoinParity.h"
+#include <iostream>
 
 int CoinParity::evaluate(const std::vector<std::vector<int>>& board) {
     int currentPlayer = getPlayer();
     int opponent = currentPlayer * -1;
     int maxCount = 0;
     int minCount = 0;
-    for(const std::vector<int>& row : board ) {
+    for(std::vector<int> row : board) {
         for(int cell : row) {
             if(cell == currentPlayer) {
                 maxCount++;
@@ -14,8 +15,9 @@ int CoinParity::evaluate(const std::vector<std::vector<int>>& board) {
             }
         }
     }
+    std::cout << maxCount << " " << minCount << std::endl;
 
-    int heuristic_value = (maxCount - minCount) / (maxCount + minCount);
+    int heuristic_value = (maxCount - minCount) * 100 / (maxCount + minCount);
 
-    return heuristic_value * 100;
+    return heuristic_value;
 }

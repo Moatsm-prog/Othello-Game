@@ -1,10 +1,12 @@
-#include <vector>
+#ifndef _HEURISTIC_H_
+#define _HEURISTIC_H_
 
+#include <vector>
 class Heuristic {
 public:
     explicit Heuristic(int player) : player(player) {}
 
-    virtual int evaluate(const std::vector<std::vector<int>>& board) const = 0;
+    virtual int evaluate(const std::vector<std::vector<int>>& board) = 0;
 
 protected:
     int getPlayer() const {
@@ -14,3 +16,5 @@ protected:
 private:
     int player;
 };
+
+#endif
