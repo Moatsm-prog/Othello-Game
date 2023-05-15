@@ -4,10 +4,10 @@
 #include "ui_mainwindow.h"
 #include "./headers/macros.h"
 
-UiGameHandler::UiGameHandler(MainWindow *main_window){
+UiGameHandler::UiGameHandler(MainWindow *main_window)
+{
     this->main_window = main_window;
 }
-
 
 void UiGameHandler::draw(int type, int x, int y)
 {
@@ -37,7 +37,7 @@ void UiGameHandler::draw(int type, int x, int y)
     }
     else
     {
-        qDebug()<<"Unsupported type";
+        qDebug() << "Unsupported type";
     }
     piece_widget->setStyleSheet(piece);
     // set the widget inside the cell
@@ -52,8 +52,8 @@ void UiGameHandler::draw(int type, int x, int y)
 void UiGameHandler::draw_initial_pieces()
 {
     draw(BLACK, 3, 4);
-    draw(BLACK, 4, 3);
     draw(WHITE, 3, 3);
+    draw(BLACK, 4, 3);
     draw(WHITE, 4, 4);
     this->main_window->drawAvailableMoves();
 }
@@ -69,29 +69,26 @@ void UiGameHandler::clear_table()
         }
 }
 
-
 void UiGameHandler::reset_game()
 {
+    main_window->turn = BLACK;
     clear_table();
     draw_initial_pieces();
-    set_black_score(0);
-    set_white_score(0);
+    set_black_score(2);
+    set_white_score(2);
     set_turn_label(BLACK);
     main_window->turn = BLACK;
 }
-
 
 void UiGameHandler::set_black_score(int score)
 {
     main_window->ui->black_score_label->setText(QString::number(score));
 }
 
-
 void UiGameHandler::set_white_score(int score)
 {
     main_window->ui->white_score_label->setText(QString::number(score));
 }
-
 
 void UiGameHandler::set_turn_label(int turn)
 {
@@ -101,7 +98,7 @@ void UiGameHandler::set_turn_label(int turn)
         main_window->ui->turn_label->setText("White");
     else
     {
-        qDebug()<<"type not supproted, pass either 1 for black or 0 for white.";
+        qDebug() << "type not supproted, pass either 1 for black or 0 for white.";
     }
     main_window->turn = !main_window->turn;
 }
