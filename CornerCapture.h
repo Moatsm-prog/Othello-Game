@@ -1,3 +1,6 @@
+s#ifndef _CORNER_CAPTURE_
+#define _CORNER_CAPTURE_
+
 #include "Heuristic.h"
 
 class CornerCapture : public Heuristic {
@@ -14,3 +17,5 @@ public:
                                                    {BOARD_SIZE - 1, 0}, // bottom left corner 
                                                    {BOARD_SIZE - 1, BOARD_SIZE - 1}}; // bottom right corner
 };
+
+#endif

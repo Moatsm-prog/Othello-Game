@@ -1,3 +1,6 @@
+#ifndef _COIN_PARITY_H_
+#define _COIN_PARITY_H_
+
 #include "Heuristic.h"
 
 class CoinParity : public Heuristic {
@@ -10,3 +13,5 @@ public:
     private:
     const int BOARD_SIZE = 8;
 };
+
+#endif
