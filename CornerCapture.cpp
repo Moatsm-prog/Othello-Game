@@ -1,19 +1,21 @@
 #include "CornerCapture.h"
-#include <math.h>
 
 // TODO : Take into Consideration the weights if implemented
 int CornerCapture::evaluate(const std::vector<std::vector<int>>& board) {
-    int whiteCount = 0;
-    int blackCount = 0;
-    int heuristic_value = 0;
+    int currentPlayer = getPlayer();
+    int opponent = currentPlayer * -1;
+    int maxCount, minCount;
+    minCount = maxCount = 0;
+    
     for(std::vector<int> corner : CORNERS) {
-        if(board[corner[0]][corner[1]] == WHITE) whiteCount++;
-        if(board[corner[0]][corner[1]] == BLACK) blackCount++;
+        if(board[corner[0]][corner[1]] == currentPlayer) maxCount++;
+        if(board[corner[0]][corner[1]] == opponent) minCount++;
     }
-    int maxPlayerCount = std::max(whiteCount, blackCount);
-    int minPlayerCount = std::min(whiteCount, blackCount);
-    if(whiteCount + blackCount != 0) {
-        heuristic_value = (maxPlayerCount - minPlayerCount) / (maxPlayerCount + minPlayerCount);
+
+    int heuristic_value = 0;
+    if(maxCount + minCount != 0) {
+        heuristic_value = (maxCount - minCount) / (maxCount + minCount);
     }
+
     return heuristic_value * 100;
 }
