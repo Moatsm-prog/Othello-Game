@@ -64,7 +64,7 @@
 </string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="main_menu_page">
        <property name="styleSheet">
@@ -628,7 +628,7 @@ QFrame{
                 </property>
                 <property name="styleSheet">
                  <string notr="true">QTableWidget {
-	background-color: rgb(0, 150, 0);
+	background-color: rgb(4, 135, 69);
 	color: rgb(223, 223, 223);
 	padding: 10px;
 	gridline-color: rgb(44, 100, 59);
