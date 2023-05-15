@@ -7,19 +7,18 @@
 AnimatedRadioButton::AnimatedRadioButton(QWidget *parent): QRadioButton(parent)
 {
     //setting the used parameters for customizing the radio button
-    _width = 60;
-    _height = 28;
-    circle_color = "#DDD";
-    background_color = "#777";
-    active_color = "#55aaff";
-    m_circlePosition = 3;
-    //this->setChecked(true);
-    //animation_curve = QEasingCurve::OutBounce;
+    _width = DEFAULT_WIDTH;
+    _height = DEFAULT_HEIGHT;
+    circle_color = DEFAULT_CIRCLE_COLOR;
+    background_color = DEFAULT_BG_COLOR;
+    active_color = DAFAULT_ACTIVE_BG_COLOR;
+    m_circlePosition = DEFAULT_CIRCLE_POS;
     animation = new QPropertyAnimation(this, "circlePosition", this);
     animation->setEasingCurve(QEasingCurve::OutBounce);
-    animation->setDuration(400);
+    animation->setDuration(DEFAULT_ANIMATION_DUR);
     this->setCursor(Qt::PointingHandCursor);
     this->setFixedSize(this->_width, this->_height);
+    //connecting the toggling signal with the transitioning animation
     connect(this, &AnimatedRadioButton::toggled, this, &AnimatedRadioButton::start_transition);
 }
 
@@ -37,6 +36,7 @@ void AnimatedRadioButton::setCirclePosition(float pos) {
 }
 
 bool AnimatedRadioButton::hitButton(const QPoint &pos) const{
+    //checking if the click belongs to the new drawn interface of the radio button (the animated one)
     return this->contentsRect().contains(pos);
 }
 
@@ -51,6 +51,7 @@ void AnimatedRadioButton::start_transition(int value){
 
 void AnimatedRadioButton::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
+    //removing the sharp texture
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(Qt::NoPen);
     if (!this->isChecked()) {
@@ -68,7 +69,6 @@ void AnimatedRadioButton::paintEvent(QPaintEvent *event) {
         painter.setBrush(QColor(circle_color));
         painter.drawEllipse(static_cast<int>(m_circlePosition), 3, 22, 22);
     }
-
     painter.end();
 }
 
