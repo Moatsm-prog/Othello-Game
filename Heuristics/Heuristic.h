@@ -6,7 +6,7 @@ class Heuristic {
 public:
     explicit Heuristic(int player) : player(player) {}
 
-    virtual int evaluate(const std::vector<std::vector<int>>& board) = 0;
+    virtual double evaluate(const std::vector<std::vector<int>>& board) = 0;
 
 protected:
     int getPlayer() const {

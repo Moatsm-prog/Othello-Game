@@ -8,7 +8,7 @@ public:
     CornerCapture(int player) : Heuristic(player) {
     }
     
-    int evaluate(const std::vector<std::vector<int>>& board);
+    double evaluate(const std::vector<std::vector<int>>& board);
 
     private:
     const int BOARD_SIZE = 8;

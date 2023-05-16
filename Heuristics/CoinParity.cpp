@@ -1,7 +1,7 @@
 #include "CoinParity.h"
 #include <iostream>
 
-int CoinParity::evaluate(const std::vector<std::vector<int>>& board) {
+double CoinParity::evaluate(const std::vector<std::vector<int>>& board) {
     int currentPlayer = getPlayer();
     int opponent = currentPlayer * -1;
     int maxCount = 0;
@@ -17,7 +17,7 @@ int CoinParity::evaluate(const std::vector<std::vector<int>>& board) {
     }
     std::cout << maxCount << " " << minCount << std::endl;
 
-    int heuristic_value = (maxCount - minCount) * 100 / (maxCount + minCount);
+    double heuristic_value = (maxCount - minCount) * 100 / (maxCount + minCount);
 
     return heuristic_value;
 }
