@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->set_up_ost();
     this->setWindowTitle("The Othello");
+    ui->board_table_widget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->stackedWidget->setCurrentWidget(ui->main_menu_page);
     game_logic = new GameLogic();
     menu_animation_handler = new MenuAnimationHandler(this);
