@@ -8,11 +8,15 @@
 #include "headers/game_page_animation_handler.h"
 #include "headers/ui_game_handler.h"
 
+// #define DEBUGARRPAIRS(A,n) { qDebug() << #A << " = \n"; FORN(_,n) qDebug() << A[_].first << ' ' << A[_].second << '\n'; }
+
+void debug_board();
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->set_up_ost();
+    // this->set_up_ost();
     this->setWindowTitle("The Othello");
     ui->board_table_widget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->stackedWidget->setCurrentWidget(ui->main_menu_page);
@@ -27,18 +31,18 @@ MainWindow::~MainWindow()
     delete game_logic;
     delete this->menu_animation_handler;
     delete this->ui_game_handler;
-    delete this->media_player;
-    delete this->playlist;
+    // delete this->media_player;
+    // delete this->playlist;
 }
 
 void MainWindow::set_up_ost(){
-    playlist = new QMediaPlaylist();
+    /*playlist = new QMediaPlaylist();
     playlist->addMedia(QUrl("qrc:/sounds/sound_tracks/ost.mp3"));
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
     media_player = new QMediaPlayer();
     media_player->setPlaylist(playlist);
     media_player->setVolume(100);
-    media_player->play();
+    media_player->play();*/
 }
 
 void MainWindow::prompt_for_quit()
@@ -63,10 +67,11 @@ void MainWindow::on_side_menu_toggle_clicked()
 void MainWindow::on_board_table_widget_cellClicked(int row, int column)
 {
     QWidget *cell_widget = ui->board_table_widget->cellWidget(row, column);
-    if (cell_widget && cell_widget->cursor() == Qt::PointingHandCursor)
+    if (cell_widget && cell_widget->cursor() == Qt::PointingHandCursor) // cursor on available move
     {
         ui->board_table_widget->removeCellWidget(row, column);
-        ui_game_handler->draw(this->turn, row, column);
+        game_logic->update(this->turn, row, column);
+        drawPlayerPosition();
         drawAvailableMoves();
         ui_game_handler->set_turn_label(!this->turn);
         updateScore();
@@ -202,13 +207,23 @@ void MainWindow::updateScore() {
 
 void MainWindow::on_side_menu_sound_btn_clicked()
 {
-    QIcon icon = QIcon();
+    /*QIcon icon = QIcon();
     if (this->media_player->isMuted())
         icon.addPixmap(QPixmap(":/icons48x48/icons/48x48/volume_off.png"), QIcon::Normal, QIcon::Off);
     else
         icon.addPixmap(QPixmap(":/icons48x48/icons/48x48/volumne_on.png"), QIcon::Normal, QIcon::Off);
 
     this->ui->side_menu_sound_btn->setIcon(icon);
-    media_player->setMuted(!media_player->isMuted());
+    media_player->setMuted(!media_player->isMuted());*/
 }
 
+void MainWindow::debug_board() {
+    std::vector<std::pair<int, int>> available_moves_black = game_logic->getAvailableMoves(BLACK);
+    std::vector<std::pair<int, int>> available_moves_white = game_logic->getAvailableMoves(WHITE);
+    std::vector<std::pair<int, int>> player_positions_white = game_logic->getPlayerPositions(WHITE);
+    std::vector<std::pair<int, int>> player_positions_black = game_logic->getPlayerPositions(BLACK);
+    // DEBUGARRPAIRS(available_moves_black, available_moves_black.size());
+    // DEBUGARRPAIRS(available_moves_white, available_moves_white.size());
+    // DEBUGARRPAIRS(player_positions_black, player_positions_black.size());
+    // DEBUGARRPAIRS(player_positions_white, player_positions_white.size());
+}
