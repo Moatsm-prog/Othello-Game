@@ -72,8 +72,8 @@ void MainWindow::on_board_table_widget_cellClicked(int row, int column)
         ui->board_table_widget->removeCellWidget(row, column);
         game_logic->update(this->turn, row, column);
         drawPlayerPosition();
-        drawAvailableMoves();
         ui_game_handler->set_turn_label(!this->turn);
+        drawAvailableMoves();
         updateScore();
         if(game_logic->isGameOver()) {
             QMessageBox msgBox;
