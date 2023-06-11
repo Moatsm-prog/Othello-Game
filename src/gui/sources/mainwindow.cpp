@@ -73,7 +73,12 @@ void MainWindow::on_board_table_widget_cellClicked(int row, int column)
         game_logic->update(this->turn, row, column);
         drawPlayerPosition();
         ui_game_handler->set_turn_label(!this->turn);
-        drawAvailableMoves();
+        bool hasAvailableMoves = drawAvailableMoves();
+        if(!hasAvailableMoves){
+            this->turn = !this->turn;
+            ui_game_handler->set_turn_label(this->turn);
+            drawAvailableMoves();
+        }
         updateScore();
         if(game_logic->isGameOver()) {
             QMessageBox msgBox;
@@ -192,11 +197,14 @@ void MainWindow::drawPlayerPosition() {
     }
 }
 
-void MainWindow::drawAvailableMoves() {
+bool MainWindow::drawAvailableMoves() {
+    bool hasAvailableMoves = false;
     std::vector<std::pair<int, int>> moves = game_logic->getAvailableMoves(this->turn);
     for(std::pair<int, int> move : moves) {
         ui_game_handler->draw(INDICATOR, move.first, move.second);
+        hasAvailableMoves = true;
     }
+    return hasAvailableMoves;
 }
 
 void MainWindow::updateScore() {

@@ -28,7 +28,7 @@ public:
     //bried: destructor of the class resposible for deleting the class components, media player, and playlist.
     ~MainWindow();
 
-    void drawAvailableMoves();
+    bool drawAvailableMoves();
 
     Ui::MainWindow *ui;
 
