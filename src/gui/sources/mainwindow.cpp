@@ -35,7 +35,8 @@ MainWindow::~MainWindow()
     // delete this->playlist;
 }
 
-void MainWindow::set_up_ost(){
+void MainWindow::set_up_ost()
+{
     /*playlist = new QMediaPlaylist();
     playlist->addMedia(QUrl("qrc:/sounds/sound_tracks/ost.mp3"));
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
@@ -69,25 +70,34 @@ void MainWindow::on_board_table_widget_cellClicked(int row, int column)
     QWidget *cell_widget = ui->board_table_widget->cellWidget(row, column);
     if (cell_widget && cell_widget->cursor() == Qt::PointingHandCursor) // cursor on available move
     {
+        // This is AI turn
+        // auto ab = AlphaBeta(*game_logic, difficulty);
+        // auto move = ab.alphaBetaSearch(this->turn);
+        // game_logic->update(this->turn, move.first, move.second);
+        // std::cout << move.first << " " << move.second << std::endl;
+
         ui->board_table_widget->removeCellWidget(row, column);
         game_logic->update(this->turn, row, column);
         drawPlayerPosition();
         ui_game_handler->set_turn_label(!this->turn);
         bool hasAvailableMoves = drawAvailableMoves();
-        if(!hasAvailableMoves){
+        if (!hasAvailableMoves)
+        {
             this->turn = !this->turn;
             ui_game_handler->set_turn_label(this->turn);
             drawAvailableMoves();
         }
         updateScore();
-        if(game_logic->isGameOver()) {
+        if (game_logic->isGameOver())
+        {
             QMessageBox msgBox;
             msgBox.setText("Game Over");
             msgBox.setInformativeText("Do you want to quit ?");
             msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
             msgBox.setDefaultButton(QMessageBox::Yes);
             int ret = msgBox.exec();
-            if(ret == QMessageBox::Yes) {
+            if (ret == QMessageBox::Yes)
+            {
                 QApplication::quit();
             }
         }
@@ -103,7 +113,7 @@ void MainWindow::on_main_menu_start_btn_clicked()
 void MainWindow::on_main_menu_options_btn_clicked()
 {
     // TODO: add the options widget, then remove this comment;
-     ui->stackedWidget->setCurrentWidget(ui->options_page);
+    ui->stackedWidget->setCurrentWidget(ui->options_page);
 }
 
 void MainWindow::on_main_menu_quit_btn_clicked()
@@ -146,68 +156,75 @@ void MainWindow::on_side_menu_back_btn_clicked()
 
 void MainWindow::on_optionButton_clicked()
 {
-//    GameMode game_mode = GameMode::ComputervsComputer;
-//    GameDifficulty game_difficulty = GameDifficulty::Esay;
+    //    GameMode game_mode = GameMode::ComputervsComputer;
+    //    GameDifficulty game_difficulty = GameDifficulty::Esay;
 
-//    /*Game Options*/
-//    if(ui->ai_ai_option->isChecked())
-//    {
-//        game_mode = GameMode::ComputervsComputer;
-//    }
-//    else if(ui->human_ai_option->isChecked())
-//    {
-//        game_mode = GameMode::HumanvsComputer;
-//    }
-//    else if(ui->human_human_option->isChecked())
-//    {
-//        game_mode = GameMode::HumanvsHuman;
-//    }
-//    /*Game Difficult Code*/
-//    if(ui->easy_option->isChecked())
-//    {
-//        game_difficulty = GameDifficulty::Esay;
-//    }
-//    else if(ui->medium_option->isChecked())
-//    {
-//        game_difficulty = GameDifficulty::Medium;
-//    }
-//    else if(ui->hard_option->isChecked())
-//    {
-//        game_difficulty = GameDifficulty::Diffuclut;
-//    }
+    //    /*Game Options*/
+    //    if(ui->ai_ai_option->isChecked())
+    //    {
+    //        game_mode = GameMode::ComputervsComputer;
+    //    }
+    //    else if(ui->human_ai_option->isChecked())
+    //    {
+    //        game_mode = GameMode::HumanvsComputer;
+    //    }
+    //    else if(ui->human_human_option->isChecked())
+    //    {
+    //        game_mode = GameMode::HumanvsHuman;
+    //    }
+    //    /*Game Difficult Code*/
+    //    if(ui->easy_option->isChecked())
+    //    {
+    //        game_difficulty = GameDifficulty::Esay;
+    //    }
+    //    else if(ui->medium_option->isChecked())
+    //    {
+    //        game_difficulty = GameDifficulty::Medium;
+    //    }
+    //    else if(ui->hard_option->isChecked())
+    //    {
+    //        game_difficulty = GameDifficulty::Diffuclut;
+    //    }
 
-//    game_logic->setGameDifficultyLevel(game_difficulty);
-//    game_logic->setGameMode(game_mode);
+    //    game_logic->setGameDifficultyLevel(game_difficulty);
+    //    game_logic->setGameMode(game_mode);
 }
 
-void MainWindow::on_back_options_btn_clicked(){
+void MainWindow::on_back_options_btn_clicked()
+{
     ui->stackedWidget->setCurrentWidget(ui->main_menu_page);
 }
 
-void MainWindow::drawPlayerPosition() {
+void MainWindow::drawPlayerPosition()
+{
     ui_game_handler->clear_table();
     std::vector<std::pair<int, int>> black_moves = game_logic->getPlayerPositions(BLACK);
     std::vector<std::pair<int, int>> white_moves = game_logic->getPlayerPositions(WHITE);
-    for(std::pair<int, int> move : black_moves) {
+    for (std::pair<int, int> move : black_moves)
+    {
         ui_game_handler->draw(BLACK, move.first, move.second);
     }
 
-    for(std::pair<int, int> move : white_moves) {
+    for (std::pair<int, int> move : white_moves)
+    {
         ui_game_handler->draw(WHITE, move.first, move.second);
     }
 }
 
-bool MainWindow::drawAvailableMoves() {
+bool MainWindow::drawAvailableMoves()
+{
     bool hasAvailableMoves = false;
     std::vector<std::pair<int, int>> moves = game_logic->getAvailableMoves(this->turn);
-    for(std::pair<int, int> move : moves) {
+    for (std::pair<int, int> move : moves)
+    {
         ui_game_handler->draw(INDICATOR, move.first, move.second);
         hasAvailableMoves = true;
     }
     return hasAvailableMoves;
 }
 
-void MainWindow::updateScore() {
+void MainWindow::updateScore()
+{
     std::pair<int, int> score = game_logic->getScore();
     ui_game_handler->set_black_score(score.second);
     ui_game_handler->set_white_score(score.first);
@@ -225,7 +242,8 @@ void MainWindow::on_side_menu_sound_btn_clicked()
     media_player->setMuted(!media_player->isMuted());*/
 }
 
-void MainWindow::debug_board() {
+void MainWindow::debug_board()
+{
     std::vector<std::pair<int, int>> available_moves_black = game_logic->getAvailableMoves(BLACK);
     std::vector<std::pair<int, int>> available_moves_white = game_logic->getAvailableMoves(WHITE);
     std::vector<std::pair<int, int>> player_positions_white = game_logic->getPlayerPositions(WHITE);

@@ -15,9 +15,9 @@ public:
     AlphaBeta(GameLogic gameLogic_);
 
     std::pair<int, int> alphaBetaSearch(int playerInTurn);
-    std::pair<int,int> AlphaBeta::iterativeDeepeningSearch(int playerInTurn, int depth);
+    std::pair<int,int> iterativeDeepeningSearch(int playerInTurn, int depth);
     int evaluateBoard(int playerInTurn);
-    int AlphaBeta::alphaBetaSearchRecursive(int playerInTurn, int depth, int alpha, int beta);
+    int alphaBetaSearchRecursive(int playerInTurn, int depth, int alpha, int beta);
 
 };
 

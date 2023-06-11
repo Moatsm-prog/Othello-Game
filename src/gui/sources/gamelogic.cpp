@@ -14,6 +14,35 @@ GameLogic::GameLogic(Player *blackPlayer, Player *whitePlayer)
     initLogger();
 }
 
+// copy constructor
+GameLogic::GameLogic(const GameLogic &gameLogic)
+{
+    // copy board
+    for (int i = 0; i < 8; i++)
+        for (int j = 0; j < 8; j++)
+            board[i][j] = gameLogic.board[i][j];
+    // copy players
+    blackPlayer = gameLogic.blackPlayer;
+    whitePlayer = gameLogic.whitePlayer;
+}
+
+// copy assignment operator
+GameLogic &GameLogic::operator=(const GameLogic &gameLogic)
+{
+    // copy board
+    if (this != &gameLogic)
+    {
+        // copy board
+        for (int i = 0; i < 8; i++)
+            for (int j = 0; j < 8; j++)
+                board[i][j] = gameLogic.board[i][j];
+        // copy players
+        blackPlayer = gameLogic.blackPlayer;
+        whitePlayer = gameLogic.whitePlayer;
+    }
+    return *this;
+}
+
 void GameLogic::initBoard()
 {
     for (int i = 0; i < 8; i++)

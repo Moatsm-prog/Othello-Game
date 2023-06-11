@@ -1,9 +1,7 @@
-#include "AlphaBeta.h"
+#include "../headers/AlphaBeta.h"
 
-AlphaBeta::AlphaBeta(GameLogic gameLogic_)
+AlphaBeta::AlphaBeta(GameLogic gameLogic_) : gameLogic(gameLogic_)
 {
-    // Initialize the game logic
-    gameLogic = gameLogic_;
     maxSearchTime = 5000; // Set the maximum search time to 5 seconds
 }
 
@@ -16,7 +14,7 @@ std::pair<int, int> AlphaBeta::alphaBetaSearch(int playerInTurn)
     while (true)
     {
         std::pair<int, int> currentBestMove = iterativeDeepeningSearch(playerInTurn, depth);
-
+        bestMove = currentBestMove;
         // Check if the search time constraint is violated
         std::chrono::steady_clock::time_point currentTime = std::chrono::steady_clock::now();
         std::chrono::milliseconds elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime);
@@ -25,7 +23,6 @@ std::pair<int, int> AlphaBeta::alphaBetaSearch(int playerInTurn)
             break;
         }
 
-        bestMove = currentBestMove;
         depth++;
     }
 
@@ -45,7 +42,10 @@ std::pair<int, int> AlphaBeta::iterativeDeepeningSearch(int playerInTurn, int de
         int x = move.first;
         int y = move.second;
 
-        // Make the move
+        // Get a copy of the current board
+        GameLogic gameLogicCopy = GameLogic(gameLogic);
+
+        // Make the move on the original board
         gameLogic.update(playerInTurn, x, y);
 
         int eval = alphaBetaSearchRecursive(playerInTurn, depth - 1, alpha, beta);
@@ -59,9 +59,8 @@ std::pair<int, int> AlphaBeta::iterativeDeepeningSearch(int playerInTurn, int de
             beta = eval;
             bestMove = std::make_pair(x, y);
         }
-
-        // Undo the move
-        gameLogic.update(GameLogic::EMPTY, x, y);
+        // restore the original board
+        gameLogic = gameLogicCopy;
     }
 
     return bestMove;

@@ -14,7 +14,8 @@ SOURCES += \
     sources/game_page_animation_handler.cpp \
     sources/mainwindow.cpp \
     sources/gamelogic.cpp \
-    sources/ui_game_handler.cpp
+    sources/ui_game_handler.cpp \
+    sources/AlphaBeta.cpp
 
 HEADERS += \
     headers/animatedradiobutton.h \
@@ -22,7 +23,8 @@ HEADERS += \
     headers/mainwindow.h \
     headers/macros.h \
     headers/gamelogic.h \
-    headers/ui_game_handler.h
+    headers/ui_game_handler.h \
+    headers/AlphaBeta.h
 
 FORMS += \
     forms/mainwindow.ui

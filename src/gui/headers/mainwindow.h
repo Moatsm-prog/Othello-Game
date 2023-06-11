@@ -3,6 +3,7 @@
 #include<QPropertyAnimation>
 #include<QParallelAnimationGroup>
 #include "gamelogic.h"
+#include "AlphaBeta.h"
 #include <QMainWindow>
 
 

@@ -38,6 +38,10 @@ public:
     static const int BLACK = 1;
     GameLogic();
     GameLogic(Player *black, Player *white);
+    // copy constructor
+    GameLogic(const GameLogic &gameLogic);
+    // copy assignment operator
+    GameLogic &operator=(const GameLogic &gameLogic);
     void initBoard();
     void initLogger();
     void update(int playerInTurn, int xPosition, int yPosition);
