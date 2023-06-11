@@ -4,8 +4,6 @@
 #include<QParallelAnimationGroup>
 #include "gamelogic.h"
 #include <QMainWindow>
-#include <QMediaPlaylist>
-#include <QMediaPlayer>
 
 
 //forward declaration of class MenuAnimationHandler
@@ -30,7 +28,7 @@ public:
     //bried: destructor of the class resposible for deleting the class components, media player, and playlist.
     ~MainWindow();
 
-    void drawAvailableMoves();
+    bool drawAvailableMoves();
 
     Ui::MainWindow *ui;
 
@@ -40,6 +38,8 @@ public:
     //0 if white and 1 for black
     int turn;
 
+    void updateScore();
+
 private:
     //pointer to the menu animation handler responsible for handling the side menu animation of the main window
     MenuAnimationHandler *menu_animation_handler;
@@ -48,17 +48,15 @@ private:
     UiGameHandler *ui_game_handler;
 
     //pointer to the playlist containing the OST of the game
-    QMediaPlaylist *playlist;
+    // QMediaPlaylist *playlist;
 
     //pointer to the game media player responsible for playing its sound effects
-    QMediaPlayer *media_player;
+    // QMediaPlayer *media_player;
 
     //brief: setting up the game media player and playing the OST in the background
     void set_up_ost();
 
     void drawPlayerPosition();
-
-    void updateScore();
 
     //breif: prompt_for_quit method responsible for asking the user to quit and handling his response.
     void prompt_for_quit();
@@ -100,5 +98,7 @@ private slots:
 
     // breif: on_side_menu_sound_btn_clicked slot responsible for muting/unmuting game background music.
     void on_side_menu_sound_btn_clicked();
+
+    void debug_board();
 };
 #endif // MAINWINDOW_H

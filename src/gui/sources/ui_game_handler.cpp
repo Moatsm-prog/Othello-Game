@@ -23,12 +23,10 @@ void UiGameHandler::draw(int type, int x, int y)
     if (type == BLACK)
     {
         piece = BLACK_PIECE;
-        main_window->game_logic->update(type, x, y);
     }
     else if (type == WHITE)
     {
         piece = WHITE_PIECE;
-        main_window->game_logic->update(type, x, y);
     }
     else if (type == INDICATOR)
     {
@@ -73,9 +71,9 @@ void UiGameHandler::reset_game()
 {
     main_window->turn = BLACK;
     clear_table();
+    main_window->game_logic->reset();
     draw_initial_pieces();
-    set_black_score(2);
-    set_white_score(2);
+    main_window->updateScore();
     set_turn_label(BLACK);
     main_window->turn = BLACK;
 }
