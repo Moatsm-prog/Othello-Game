@@ -156,38 +156,45 @@ void MainWindow::on_side_menu_back_btn_clicked()
 
 void MainWindow::on_optionButton_clicked()
 {
-    //    GameMode game_mode = GameMode::ComputervsComputer;
-    //    GameDifficulty game_difficulty = GameDifficulty::Esay;
+//    /*Game Options*/
+   if(ui->ai_ai_option->isChecked())
+   {
+       this->game_mode = GameMode::ComputervsComputer;
+   }
+   else if(ui->human_ai_option->isChecked())
+   {
+       this->game_mode = GameMode::HumanvsComputer;
+   }
+   else if(ui->human_human_option->isChecked())
+   {
+       this->game_mode = GameMode::HumanvsHuman;
+   }
+   /*Game Difficult Code*/
+    if(ui->easy_option->isChecked())
+    {
+        this->white_game_difficulty = White_Easy;
+    }
+    else if(ui->medium_option->isChecked())
+    {
+        this->white_game_difficulty = White_Medium;
+    }
+    else if(ui->hard_option->isChecked())
+    {
+        this->white_game_difficulty = White_Diffuclut;
+    }
 
-    //    /*Game Options*/
-    //    if(ui->ai_ai_option->isChecked())
-    //    {
-    //        game_mode = GameMode::ComputervsComputer;
-    //    }
-    //    else if(ui->human_ai_option->isChecked())
-    //    {
-    //        game_mode = GameMode::HumanvsComputer;
-    //    }
-    //    else if(ui->human_human_option->isChecked())
-    //    {
-    //        game_mode = GameMode::HumanvsHuman;
-    //    }
-    //    /*Game Difficult Code*/
-    //    if(ui->easy_option->isChecked())
-    //    {
-    //        game_difficulty = GameDifficulty::Esay;
-    //    }
-    //    else if(ui->medium_option->isChecked())
-    //    {
-    //        game_difficulty = GameDifficulty::Medium;
-    //    }
-    //    else if(ui->hard_option->isChecked())
-    //    {
-    //        game_difficulty = GameDifficulty::Diffuclut;
-    //    }
-
-    //    game_logic->setGameDifficultyLevel(game_difficulty);
-    //    game_logic->setGameMode(game_mode);
+    if(ui->easy_option_2->isChecked())
+    {
+        this->black_game_difficulty = Black_Easy;
+    }
+    else if(ui->medium_option_2->isChecked())
+    {
+        this->black_game_difficulty = Black_Medium;
+    }
+    else if(ui->hard_option_2->isChecked())
+    {
+        this->black_game_difficulty = Black_Diffuclut;
+    }
 }
 
 void MainWindow::on_back_options_btn_clicked()

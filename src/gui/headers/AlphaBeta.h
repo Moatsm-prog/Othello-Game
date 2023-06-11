@@ -3,7 +3,7 @@
 
 #include <chrono>
 #include <limits>
-#include "GameLogic.h"
+#include "gamelogic.h"
 
 class AlphaBeta {
 private:

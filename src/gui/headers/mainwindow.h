@@ -7,6 +7,10 @@
 #include <QMainWindow>
 
 
+enum GameMode {ComputervsComputer, HumanvsComputer, HumanvsHuman};
+enum White_GameDifficulty {White_Easy, White_Medium, White_Diffuclut};
+enum Black_GameDifficulty {Black_Easy, Black_Medium, Black_Diffuclut};
+
 //forward declaration of class MenuAnimationHandler
 class MenuAnimationHandler;
 //forward declaration of class MenuAnimationHandler
@@ -61,6 +65,10 @@ private:
 
     //breif: prompt_for_quit method responsible for asking the user to quit and handling his response.
     void prompt_for_quit();
+
+    GameMode game_mode = HumanvsComputer;
+    White_GameDifficulty white_game_difficulty = White_Easy;
+    Black_GameDifficulty black_game_difficulty = Black_Easy;
 
 private slots:
     // breif: on_side_menu_toggle_clicked slot responsible for expanding/collapsing the side menu when the toggle button is clicked.
