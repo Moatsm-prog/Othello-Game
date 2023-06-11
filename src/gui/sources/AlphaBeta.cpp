@@ -48,10 +48,15 @@ std::pair<int, int> AlphaBeta::iterativeDeepeningSearch(int playerInTurn, int de
         // Make the move
         gameLogic.update(playerInTurn, x, y);
 
-        int eval = alphaBetaSearchRecursive(GameLogic::BLACK, depth - 1, alpha, beta);
-        if (eval > alpha)
+        int eval = alphaBetaSearchRecursive(playerInTurn, depth - 1, alpha, beta);
+        if (eval > alpha && GameLogic::BLACK)
         {
             alpha = eval;
+            bestMove = std::make_pair(x, y);
+        }
+        else if (eval < beta && GameLogic::WHITE)
+        {
+            beta = eval;
             bestMove = std::make_pair(x, y);
         }
 
@@ -72,7 +77,7 @@ int AlphaBeta::alphaBetaSearchRecursive(int playerInTurn, int depth, int alpha, 
     std::vector<std::pair<int, int>> availableMoves = gameLogic.getAvailableMoves(playerInTurn);
 
     // Maximizer
-    if (playerInTurn == GameLogic::Black)
+    if (playerInTurn == GameLogic::BLACK)
     {
         int maxEval = std::numeric_limits<int>::min();
 
@@ -84,7 +89,7 @@ int AlphaBeta::alphaBetaSearchRecursive(int playerInTurn, int depth, int alpha, 
             // Make the move
             gameLogic.update(playerInTurn, x, y);
 
-            int eval = alphaBetaSearchRecursive(GameLogic::BLACK, depth - 1, alpha, beta);
+            int eval = alphaBetaSearchRecursive(GameLogic::WHITE, depth - 1, alpha, beta);
             maxEval = std::max(maxEval, eval);
             alpha = std::max(alpha, eval);
 
@@ -113,7 +118,7 @@ int AlphaBeta::alphaBetaSearchRecursive(int playerInTurn, int depth, int alpha, 
             // Make the move
             gameLogic.update(playerInTurn, x, y);
 
-            int eval = alphaBetaSearchRecursive(GameLogic::WHITE, depth - 1, alpha, beta);
+            int eval = alphaBetaSearchRecursive(GameLogic::BLACK, depth - 1, alpha, beta);
             minEval = std::min(minEval, eval);
             beta = std::min(beta, eval);
 
@@ -130,15 +135,15 @@ int AlphaBeta::alphaBetaSearchRecursive(int playerInTurn, int depth, int alpha, 
     }
 }
 
-std::pair<int, int> AlphaBeta::evaluateBoard(int playerInTurn)
+int AlphaBeta::evaluateBoard(int playerInTurn)
 {
     int score = 0;
 
-    std::pair<int, int> playerScores = getScore();
+    std::pair<int, int> playerScores = gameLogic.getScore();
     int currentPlayerScore = playerScores.first;
     int opponentScore = playerScores.second;
 
-    if (playerInTurn == WHITE)
+    if (playerInTurn == GameLogic::WHITE)
     {
         score = currentPlayerScore - opponentScore;
     }
