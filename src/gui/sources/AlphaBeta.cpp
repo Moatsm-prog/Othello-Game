@@ -10,9 +10,9 @@ std::pair<int, int> AlphaBeta::alphaBetaSearch(int playerInTurn, int difficulty)
     startTime = std::chrono::steady_clock::now();
     std::pair<int, int> bestMove = {-2, -2};
     int depth = 1;
-    if(difficulty == 0) this->maxSearchTime = 100;
-    else if(difficulty == 1) this->maxSearchTime = 100;
-    else if(difficulty == 2) this->maxSearchTime = 200;
+    if(difficulty == 0) this->maxSearchTime = 50;
+    else if(difficulty == 1) this->maxSearchTime = 200;
+    else if(difficulty == 2) this->maxSearchTime = 400;
 
     while (true)
     {
@@ -66,7 +66,11 @@ std::pair<int, int> AlphaBeta::iterativeDeepeningSearch(int playerInTurn, int de
         // restore the original board
         gameLogic = gameLogicCopy;
     }
-
+    if(bestMove.first == -2){
+        std::vector<std::pair<int, int>> availableMoves = gameLogic.getAvailableMoves(playerInTurn);
+        if(availableMoves.size() > 0)
+            bestMove = availableMoves[0];
+    }
     return bestMove;
 }
 
