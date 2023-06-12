@@ -17,11 +17,12 @@ public:
     AlphaBeta(GameLogic gameLogic_);
 
     std::pair<int, int> alphaBetaSearch(int playerInTurn , int difficulty);
-    std::pair<int,int> iterativeDeepeningSearch(int playerInTurn, int depth);
+    std::pair<int,int> iterativeDeepeningSearch(int playerInTurn, int depth, int difficulty);
     int evaluateBoard(int playerInTurn);
-    int alphaBetaSearchRecursive(int playerInTurn, int depth, int alpha, int beta);
+    int alphaBetaSearchRecursive(int playerInTurn, int depth, int alpha, int beta, int difficulty);
     bool compareHeuristics(const std::pair<std::pair<int, int>, int>& state1, const std::pair<std::pair<int, int>, int>& state2);
-    std::vector<std::pair<int, int>> sortBoardStatesByHeuristic(std::vector<std::pair<int, int>>& moves, GameLogic gamelogic_ , int playerInTurn);
+    std::vector<std::pair<int, int>> sortBoardStatesByHeuristic(std::vector<std::pair<int, int>>& moves,
+                                                                GameLogic gamelogic_ , int playerInTurn, int difficulty);
 
 
 };

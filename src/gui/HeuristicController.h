@@ -20,7 +20,7 @@ class HeuristicController {
     double MobilityHeuristic(const std::vector<std::vector<int>>& board);
 
     double CombinedStaticHeuristic(const std::vector<std::vector<int>>& board,
-     double cornerWeight=30, double stabilityWeight= 25, double coinParityWeight = 25,
+     double cornerWeight=30, double stabilityWeight= 0, double coinParityWeight = 25,
       double mobilityWeight = 5);
 
     // these default weights are the ones used in the paper, but you can change them to whatever you want

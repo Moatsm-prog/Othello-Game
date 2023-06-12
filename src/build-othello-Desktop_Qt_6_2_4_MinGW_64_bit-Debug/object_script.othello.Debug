@@ -5,6 +5,11 @@ debug/mainwindow.o
 debug/gamelogic.o
 debug/ui_game_handler.o
 debug/AlphaBeta.o
+debug/Stability.o
+debug/CoinParity.o
+debug/Mobility.o
+debug/CornerCapture.o
+debug/HeuristicController.o
 debug/qrc_resources.o
 debug/moc_animatedradiobutton.o
 debug/moc_mainwindow.o

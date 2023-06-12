@@ -2,7 +2,7 @@
 
 AlphaBeta::AlphaBeta(GameLogic gameLogic_) : gameLogic(gameLogic_)
 {
-    maxSearchTime = 200; // Set the maximum search time to 5 seconds
+    maxSearchTime = 1000; // Set the maximum search time to 5 seconds
 }
 
 std::pair<int, int> AlphaBeta::alphaBetaSearch(int playerInTurn, int difficulty)
@@ -10,10 +10,13 @@ std::pair<int, int> AlphaBeta::alphaBetaSearch(int playerInTurn, int difficulty)
     startTime = std::chrono::steady_clock::now();
     std::pair<int, int> bestMove = {-2, -2};
     int depth = 1;
+    if(difficulty == 0) this->maxSearchTime = 100;
+    else if(difficulty == 1) this->maxSearchTime = 300;
+    else if(difficulty == 2) this->maxSearchTime = 800;
 
     while (true)
     {
-        std::pair<int, int> currentBestMove = iterativeDeepeningSearch(playerInTurn, depth);
+        std::pair<int, int> currentBestMove = iterativeDeepeningSearch(playerInTurn, depth, difficulty);
         bestMove = currentBestMove;
         // Check if the search time constraint is violated
         std::chrono::steady_clock::time_point currentTime = std::chrono::steady_clock::now();
@@ -29,14 +32,14 @@ std::pair<int, int> AlphaBeta::alphaBetaSearch(int playerInTurn, int difficulty)
     return bestMove;
 }
 
-std::pair<int, int> AlphaBeta::iterativeDeepeningSearch(int playerInTurn, int depth)
+std::pair<int, int> AlphaBeta::iterativeDeepeningSearch(int playerInTurn, int depth, int difficulty)
 {
     std::pair<int, int> bestMove = {-2, -2};
     int alpha = std::numeric_limits<int>::min();
     int beta = std::numeric_limits<int>::max();
 
     std::vector<std::pair<int, int>> availableMoves = gameLogic.getAvailableMoves(playerInTurn);
-    availableMoves = sortBoardStatesByHeuristic(availableMoves, gameLogic, playerInTurn);
+    availableMoves = sortBoardStatesByHeuristic(availableMoves, gameLogic, playerInTurn ,difficulty);
 
     for (const auto &move : availableMoves)
     {
@@ -49,7 +52,7 @@ std::pair<int, int> AlphaBeta::iterativeDeepeningSearch(int playerInTurn, int de
         // Make the move on the original board
         gameLogic.update(playerInTurn, x, y);
 
-        int eval = alphaBetaSearchRecursive(playerInTurn, depth - 1, alpha, beta);
+        int eval = alphaBetaSearchRecursive(playerInTurn, depth - 1, alpha, beta, difficulty);
         if (eval > alpha && GameLogic::BLACK)
         {
             alpha = eval;
@@ -67,7 +70,7 @@ std::pair<int, int> AlphaBeta::iterativeDeepeningSearch(int playerInTurn, int de
     return bestMove;
 }
 
-int AlphaBeta::alphaBetaSearchRecursive(int playerInTurn, int depth, int alpha, int beta)
+int AlphaBeta::alphaBetaSearchRecursive(int playerInTurn, int depth, int alpha, int beta, int difficulty)
 {
     if (depth == 0 || gameLogic.isGameOver())
     {
@@ -75,7 +78,7 @@ int AlphaBeta::alphaBetaSearchRecursive(int playerInTurn, int depth, int alpha, 
     }
 
     std::vector<std::pair<int, int>> availableMoves = gameLogic.getAvailableMoves(playerInTurn);
-    availableMoves = sortBoardStatesByHeuristic(availableMoves, gameLogic, playerInTurn);
+    availableMoves = sortBoardStatesByHeuristic(availableMoves, gameLogic, playerInTurn, difficulty);
 
     // Maximizer
     if (playerInTurn == GameLogic::BLACK)
@@ -90,7 +93,7 @@ int AlphaBeta::alphaBetaSearchRecursive(int playerInTurn, int depth, int alpha, 
             // Make the move
             gameLogic.update(playerInTurn, x, y);
 
-            int eval = alphaBetaSearchRecursive(GameLogic::WHITE, depth - 1, alpha, beta);
+            int eval = alphaBetaSearchRecursive(GameLogic::WHITE, depth - 1, alpha, beta, difficulty);
             maxEval = std::max(maxEval, eval);
             alpha = std::max(alpha, eval);
 
@@ -119,7 +122,7 @@ int AlphaBeta::alphaBetaSearchRecursive(int playerInTurn, int depth, int alpha, 
             // Make the move
             gameLogic.update(playerInTurn, x, y);
 
-            int eval = alphaBetaSearchRecursive(GameLogic::BLACK, depth - 1, alpha, beta);
+            int eval = alphaBetaSearchRecursive(GameLogic::BLACK, depth - 1, alpha, beta, difficulty);
             minEval = std::min(minEval, eval);
             beta = std::min(beta, eval);
 
@@ -158,28 +161,43 @@ int AlphaBeta::evaluateBoard(int playerInTurn)
     return score;
 }
 
-bool AlphaBeta::compareHeuristics(const std::pair<std::pair<int, int>, int> &state1, const std::pair<std::pair<int, int>, int> &state2)
+/*bool AlphaBeta::compareHeuristics(const std::pair<std::pair<int, int>, int> &state1, const std::pair<std::pair<int, int>, int> &state2)
 {
 
     return state1.second > state2.second;
-}
+}*/
 
-std::vector<std::pair<int, int>> AlphaBeta::sortBoardStatesByHeuristic(std::vector<std::pair<int, int>> &moves, GameLogic gamelogic_, int playerInTurn)
+std::vector<std::pair<int, int>> AlphaBeta::sortBoardStatesByHeuristic(std::vector<std::pair<int, int>> &moves, GameLogic gamelogic_, int playerInTurn, int difficulty)
 {
     // Create a copy of the input board states
 
     GameLogic gameLogicCopy = GameLogic(gamelogic_);
     std::vector<std::pair<std::pair<int, int>, int>> sortedBoardStates;
     HeuristicController heuristicController = HeuristicController(playerInTurn);
-
-    for (int i = 0; i < moves.size(); i++)
-    {
-        gameLogicCopy.update(playerInTurn, moves[i].first, moves[i].second);
-        sortedBoardStates.push_back(std::make_pair(moves[i], heuristicController.CornersHeuristic(gameLogicCopy.getBoard())));
-        gameLogicCopy = GameLogic(gamelogic_);
+    if(difficulty == 0){
+        for (int i = 0; i < moves.size(); i++)
+        {
+            gameLogicCopy.update(playerInTurn, moves[i].first, moves[i].second);
+            sortedBoardStates.push_back(std::make_pair(moves[i], heuristicController.CoinParityHeuristic(gameLogicCopy.getBoard())));
+            gameLogicCopy = GameLogic(gamelogic_);
+        }
+    }else if(difficulty == 1){
+        for (int i = 0; i < moves.size(); i++)
+        {
+            gameLogicCopy.update(playerInTurn, moves[i].first, moves[i].second);
+            sortedBoardStates.push_back(std::make_pair(moves[i], heuristicController.CornersHeuristic(gameLogicCopy.getBoard())));
+            gameLogicCopy = GameLogic(gamelogic_);
+        }
+    }else if(difficulty == 2){
+        for (int i = 0; i < moves.size(); i++)
+        {
+            gameLogicCopy.update(playerInTurn, moves[i].first, moves[i].second);
+            sortedBoardStates.push_back(std::make_pair(moves[i], heuristicController.CombinedStaticHeuristic(gameLogicCopy.getBoard())));
+            gameLogicCopy = GameLogic(gamelogic_);
+        }
     }
-
-    //std::sort(sortedBoardStates.begin(), sortedBoardStates.end(), compareHeuristics);
+    std::sort(sortedBoardStates.begin(), sortedBoardStates.end(), [](const auto& state1, const auto& state2) {
+        return state1.second > state2.second;});
 
     std::vector<std::pair<int, int>> sortedMoves;
     for (int i = 0; i < sortedBoardStates.size(); i++)

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    const uint offsetsAndSize[32];
-    char stringdata0[367];
+    const uint offsetsAndSize[36];
+    char stringdata0[385];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_MainWindow_t, stringdata0) + ofs), len 
@@ -44,7 +44,9 @@ QT_MOC_LITERAL(242, 29), // "on_side_menu_back_btn_clicked"
 QT_MOC_LITERAL(272, 23), // "on_optionButton_clicked"
 QT_MOC_LITERAL(296, 27), // "on_back_options_btn_clicked"
 QT_MOC_LITERAL(324, 30), // "on_side_menu_sound_btn_clicked"
-QT_MOC_LITERAL(355, 11) // "debug_board"
+QT_MOC_LITERAL(355, 11), // "debug_board"
+QT_MOC_LITERAL(367, 12), // "make_ai_move"
+QT_MOC_LITERAL(380, 4) // "diff"
 
     },
     "MainWindow\0on_side_menu_toggle_clicked\0"
@@ -58,7 +60,7 @@ QT_MOC_LITERAL(355, 11) // "debug_board"
     "on_optionButton_clicked\0"
     "on_back_options_btn_clicked\0"
     "on_side_menu_sound_btn_clicked\0"
-    "debug_board"
+    "debug_board\0make_ai_move\0diff"
 };
 #undef QT_MOC_LITERAL
 
@@ -68,7 +70,7 @@ static const uint qt_meta_data_MainWindow[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -76,18 +78,19 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   86,    2, 0x08,    1 /* Private */,
-       3,    2,   87,    2, 0x08,    2 /* Private */,
-       6,    0,   92,    2, 0x08,    5 /* Private */,
-       7,    0,   93,    2, 0x08,    6 /* Private */,
-       8,    0,   94,    2, 0x08,    7 /* Private */,
-       9,    0,   95,    2, 0x08,    8 /* Private */,
-      10,    0,   96,    2, 0x08,    9 /* Private */,
-      11,    0,   97,    2, 0x08,   10 /* Private */,
-      12,    0,   98,    2, 0x08,   11 /* Private */,
-      13,    0,   99,    2, 0x08,   12 /* Private */,
-      14,    0,  100,    2, 0x08,   13 /* Private */,
-      15,    0,  101,    2, 0x08,   14 /* Private */,
+       1,    0,   92,    2, 0x08,    1 /* Private */,
+       3,    2,   93,    2, 0x08,    2 /* Private */,
+       6,    0,   98,    2, 0x08,    5 /* Private */,
+       7,    0,   99,    2, 0x08,    6 /* Private */,
+       8,    0,  100,    2, 0x08,    7 /* Private */,
+       9,    0,  101,    2, 0x08,    8 /* Private */,
+      10,    0,  102,    2, 0x08,    9 /* Private */,
+      11,    0,  103,    2, 0x08,   10 /* Private */,
+      12,    0,  104,    2, 0x08,   11 /* Private */,
+      13,    0,  105,    2, 0x08,   12 /* Private */,
+      14,    0,  106,    2, 0x08,   13 /* Private */,
+      15,    0,  107,    2, 0x08,   14 /* Private */,
+      16,    1,  108,    2, 0x08,   15 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -102,6 +105,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Bool, QMetaType::Int,   17,
 
        0        // eod
 };
@@ -124,6 +128,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 9: _t->on_back_options_btn_clicked(); break;
         case 10: _t->on_side_menu_sound_btn_clicked(); break;
         case 11: _t->debug_board(); break;
+        case 12: { bool _r = _t->make_ai_move((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     }
@@ -137,7 +143,7 @@ const QMetaObject MainWindow::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_MainWindow_t
 , QtPrivate::TypeAndForceComplete<MainWindow, std::true_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
 
 
 >,
@@ -164,13 +170,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 12)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 12)
+        if (_id < 13)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 12;
+        _id -= 13;
     }
     return _id;
 }

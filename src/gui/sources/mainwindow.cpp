@@ -103,7 +103,7 @@ void MainWindow::on_board_table_widget_cellClicked(int row, int column)
             if (!hasAvailableMoves)
             {
                 this->turn = !this->turn;
-                ui_game_handler->set_turn_label(this->turn);
+                //ui_game_handler->set_turn_label(this->turn);
                 drawAvailableMoves();
             }
         }
@@ -112,6 +112,7 @@ void MainWindow::on_board_table_widget_cellClicked(int row, int column)
         {
             QMessageBox msgBox;
             msgBox.setText("Game Over");
+            msgBox.setText("asasa");
             msgBox.setInformativeText("Do you want to quit ?");
             msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
             msgBox.setDefaultButton(QMessageBox::Yes);
