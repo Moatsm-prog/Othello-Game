@@ -15,7 +15,12 @@ SOURCES += \
     sources/mainwindow.cpp \
     sources/gamelogic.cpp \
     sources/ui_game_handler.cpp \
-    sources/AlphaBeta.cpp
+    sources/AlphaBeta.cpp \
+    Heuristics/Stability.cpp \
+    Heuristics/CoinParity.cpp \
+    Heuristics/Mobility.cpp \
+    Heuristics/CornerCapture.cpp \
+    HeuristicController.cpp
 
 HEADERS += \
     headers/animatedradiobutton.h \
@@ -24,8 +29,13 @@ HEADERS += \
     headers/macros.h \
     headers/gamelogic.h \
     headers/ui_game_handler.h \
-    headers/AlphaBeta.h
-
+    headers/AlphaBeta.h \
+    Heuristics/Heuristic.h \
+    Heuristics/Stability.h \
+    Heuristics/CoinParity.h \
+    Heuristics/Mobility.h \
+    Heuristics/CornerCapture.h \
+    HeuristicController.h
 FORMS += \
     forms/mainwindow.ui
 
