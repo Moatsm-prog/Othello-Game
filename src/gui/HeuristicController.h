@@ -2,7 +2,7 @@
 #include "./Heuristics/CoinParity.h"
 #include "./Heuristics/Stability.h"
 #include "./Heuristics/CornerCapture.h"
-// #include "Mobility.h"
+#include "./Heuristics/Mobility.h"
 
 
 
@@ -33,6 +33,6 @@ class HeuristicController {
     CoinParity *coinParity = nullptr;
     Stability *stability = nullptr;
     CornerCapture *cornerCapture = nullptr;
-    //Mobility *mobility = nullptr;
+    Mobility *mobility = nullptr;
 
 };
