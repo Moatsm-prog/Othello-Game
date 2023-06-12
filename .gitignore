@@ -6,3 +6,5 @@ othello.pro.*
 build-othello-*
 obj/
 log.txt
+.vscode/settings.json
+
