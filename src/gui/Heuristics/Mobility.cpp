@@ -17,7 +17,7 @@ bool Mobility::is_legal_direction(int curr_color, int opp_color, const std::vect
   if (grid[newi][newj] != opp_color)
     return false;
 
-  while (is_valid_move(newi + di, newj + dj))
+  while (is_valid_move(newi + di, newj + dj, grid.size()))
   {
     newi += di;
     newj += dj;
