@@ -70,12 +70,6 @@ void MainWindow::on_board_table_widget_cellClicked(int row, int column)
     QWidget *cell_widget = ui->board_table_widget->cellWidget(row, column);
     if (cell_widget && cell_widget->cursor() == Qt::PointingHandCursor) // cursor on available move
     {
-        // This is AI turn
-        // auto ab = AlphaBeta(*game_logic, difficulty);
-        // auto move = ab.alphaBetaSearch(this->turn);
-        // game_logic->update(this->turn, move.first, move.second);
-        // std::cout << move.first << " " << move.second << std::endl;
-
         ui->board_table_widget->removeCellWidget(row, column);
         game_logic->update(this->turn, row, column);
         drawPlayerPosition();
@@ -220,6 +214,29 @@ void MainWindow::drawPlayerPosition()
 
 bool MainWindow::drawAvailableMoves()
 {
+    if(game_mode == HumanvsComputer && this->turn == 0) {
+        // This is AI turn
+        auto ab = AlphaBeta(*game_logic);
+        auto move = ab.alphaBetaSearch(this->turn, white_game_difficulty);
+        if(move.first == -2 && move.second == -2){
+            return false;
+        } else {
+            ui_game_handler->draw(INDICATOR, move.first, move.second);
+            //on_board_table_widget_cellClicked(move.first, move.second);
+            return true;
+        }
+        // game_logic->update(this->turn, move.first, move.second);
+    } else if(game_mode == ComputervsComputer) {
+        auto ab = AlphaBeta(*game_logic);
+        auto diff = (this->turn == 0) ? white_game_difficulty : black_game_difficulty;
+        auto move = ab.alphaBetaSearch(this->turn, diff);
+        if(move.first == -2 && move.second == -2){
+            return false;
+        } else {
+            ui_game_handler->draw(INDICATOR, move.first, move.second);
+            return true;
+        }
+    }
     bool hasAvailableMoves = false;
     std::vector<std::pair<int, int>> moves = game_logic->getAvailableMoves(this->turn);
     for (std::pair<int, int> move : moves)

@@ -2,7 +2,7 @@
 
 AlphaBeta::AlphaBeta(GameLogic gameLogic_) : gameLogic(gameLogic_)
 {
-    maxSearchTime = 5000; // Set the maximum search time to 5 seconds
+    maxSearchTime = 500; // Set the maximum search time to 5 seconds
 }
 
 std::pair<int, int> AlphaBeta::alphaBetaSearch(int playerInTurn, int difficulty)
