@@ -109,5 +109,7 @@ private slots:
     void on_side_menu_sound_btn_clicked();
 
     void debug_board();
+
+    bool make_ai_move(int diff);
 };
 #endif // MAINWINDOW_H

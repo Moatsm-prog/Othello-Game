@@ -98,5 +98,4 @@ void UiGameHandler::set_turn_label(int turn)
     {
         qDebug() << "type not supproted, pass either 1 for black or 0 for white.";
     }
-    main_window->turn = !main_window->turn;
 }

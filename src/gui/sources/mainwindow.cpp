@@ -59,6 +59,17 @@ void MainWindow::prompt_for_quit()
         return;
     }
 }
+bool MainWindow::make_ai_move(int diff) {
+    auto ab = AlphaBeta(*game_logic);
+    auto move = ab.alphaBetaSearch(this->turn, diff);
+    if(move.first == -2 && move.second == -2){
+        return false;           
+    }
+    game_logic->update(this->turn, move.first, move.second);
+    drawPlayerPosition();
+    updateScore();
+    return true;
+}
 
 void MainWindow::on_side_menu_toggle_clicked()
 {
@@ -73,13 +84,28 @@ void MainWindow::on_board_table_widget_cellClicked(int row, int column)
         ui->board_table_widget->removeCellWidget(row, column);
         game_logic->update(this->turn, row, column);
         drawPlayerPosition();
-        ui_game_handler->set_turn_label(!this->turn);
-        bool hasAvailableMoves = drawAvailableMoves();
-        if (!hasAvailableMoves)
-        {
-            this->turn = !this->turn;
-            ui_game_handler->set_turn_label(this->turn);
-            drawAvailableMoves();
+        this->turn = !this->turn;
+        ui_game_handler->set_turn_label(this->turn);
+        if(game_mode == HumanvsComputer) {
+            bool ai_has_play = true;
+            while(ai_has_play = make_ai_move(white_game_difficulty)) {
+                this->turn = !this->turn; // turn for human
+                if(drawAvailableMoves()) {
+                    break;
+                }
+                this->turn = !this->turn; // turn for ai again
+            }
+            if(!ai_has_play){
+                this->turn = !this->turn; // turn for human
+            }
+        } else { // HumanvsHuman
+            bool hasAvailableMoves = drawAvailableMoves();
+            if (!hasAvailableMoves)
+            {
+                this->turn = !this->turn;
+                ui_game_handler->set_turn_label(this->turn);
+                drawAvailableMoves();
+            }
         }
         updateScore();
         if (game_logic->isGameOver())
@@ -214,19 +240,7 @@ void MainWindow::drawPlayerPosition()
 
 bool MainWindow::drawAvailableMoves()
 {
-    if(game_mode == HumanvsComputer && this->turn == 0) {
-        // This is AI turn
-        auto ab = AlphaBeta(*game_logic);
-        auto move = ab.alphaBetaSearch(this->turn, white_game_difficulty);
-        if(move.first == -2 && move.second == -2){
-            return false;
-        } else {
-            ui_game_handler->draw(INDICATOR, move.first, move.second);
-            //on_board_table_widget_cellClicked(move.first, move.second);
-            return true;
-        }
-        // game_logic->update(this->turn, move.first, move.second);
-    } else if(game_mode == ComputervsComputer) {
+    if(game_mode == ComputervsComputer) {
         auto ab = AlphaBeta(*game_logic);
         auto diff = (this->turn == 0) ? white_game_difficulty : black_game_difficulty;
         auto move = ab.alphaBetaSearch(this->turn, diff);
