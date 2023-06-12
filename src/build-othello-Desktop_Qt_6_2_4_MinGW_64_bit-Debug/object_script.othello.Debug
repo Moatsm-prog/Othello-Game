@@ -1,0 +1,10 @@
+debug/main.o
+debug/animatedradiobutton.o
+debug/game_page_animation_handler.o
+debug/mainwindow.o
+debug/gamelogic.o
+debug/ui_game_handler.o
+debug/AlphaBeta.o
+debug/qrc_resources.o
+debug/moc_animatedradiobutton.o
+debug/moc_mainwindow.o

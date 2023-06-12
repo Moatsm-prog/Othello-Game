@@ -268,3 +268,14 @@ void GameLogic::debug()
     }
     std::cout << horizontal << horizontal << horizontal << horizontal << horizontal << bottomRight << std::endl;
 }
+
+std::vector<std::vector<int>> GameLogic::getBoard()
+{
+    std::vector<std::vector<int>> vec(8, std::vector<int>(8));
+    for (int m = 0; m < 8; m++){        //storing and printing data
+        for (int n = 0; n < 8; n++){
+            vec[m][n] = this->board[m][n];
+        }
+    }
+    return vec;
+}
