@@ -104,15 +104,43 @@ void MainWindow::on_board_table_widget_cellClicked(int row, int column)
             {
                 this->turn = !this->turn;
                 //ui_game_handler->set_turn_label(this->turn);
-                drawAvailableMoves();
+                if(!drawAvailableMoves()){
+                    QMessageBox msgBox;
+                    std::pair<int, int> score = game_logic->getScore();
+                    ui_game_handler->set_black_score(score.second);
+                    ui_game_handler->set_white_score(score.first);
+                    if(score.second > score.first){
+                        msgBox.setText("Game Over!\n Black Wins");
+                    }else if(score.second < score.first){
+                        msgBox.setText("Game Over!\n White Wins");
+                    }else{
+                        msgBox.setText("Game Over!\n Black Wins");
+                    }
+                    msgBox.setInformativeText("Do you want to quit ?");
+                    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+                    msgBox.setDefaultButton(QMessageBox::Yes);
+                    int ret = msgBox.exec();
+                    if (ret == QMessageBox::Yes)
+                    {
+                        QApplication::quit();
+                    }
+                }
             }
         }
         updateScore();
         if (game_logic->isGameOver())
         {
             QMessageBox msgBox;
-            msgBox.setText("Game Over");
-            msgBox.setText("asasa");
+            std::pair<int, int> score = game_logic->getScore();
+            ui_game_handler->set_black_score(score.second);
+            ui_game_handler->set_white_score(score.first);
+            if(score.second > score.first){
+                msgBox.setText("Game Over!\n Black Wins");
+            }else if(score.second < score.first){
+                msgBox.setText("Game Over!\n White Wins");
+            }else{
+                msgBox.setText("Game Over!\n Black Wins");
+            }
             msgBox.setInformativeText("Do you want to quit ?");
             msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
             msgBox.setDefaultButton(QMessageBox::Yes);
@@ -135,6 +163,7 @@ void MainWindow::on_main_menu_options_btn_clicked()
 {
     // TODO: add the options widget, then remove this comment;
     ui->stackedWidget->setCurrentWidget(ui->options_page);
+    ui->frame_8->hide();
 }
 
 void MainWindow::on_main_menu_quit_btn_clicked()
@@ -292,3 +321,29 @@ void MainWindow::debug_board()
     // DEBUGARRPAIRS(player_positions_black, player_positions_black.size());
     // DEBUGARRPAIRS(player_positions_white, player_positions_white.size());
 }
+
+void MainWindow::on_ai_ai_option_clicked()
+{
+    this->game_mode = GameMode::ComputervsComputer;
+    ui->frame_8->show();
+    ui->frame_9->show();
+
+
+}
+
+
+void MainWindow::on_human_ai_option_clicked()
+{
+    this->game_mode = GameMode::HumanvsComputer;
+    ui->frame_8->hide();
+    ui->frame_9->show();
+}
+
+
+void MainWindow::on_human_human_option_clicked()
+{
+    this->game_mode = GameMode::HumanvsHuman;
+    ui->frame_8->hide();
+    ui->frame_9->hide();
+}
+

@@ -111,5 +111,8 @@ private slots:
     void debug_board();
 
     bool make_ai_move(int diff);
+    void on_ai_ai_option_clicked();
+    void on_human_ai_option_clicked();
+    void on_human_human_option_clicked();
 };
 #endif // MAINWINDOW_H

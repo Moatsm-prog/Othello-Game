@@ -606,6 +606,7 @@ public:
 
         frame_8 = new QFrame(widget);
         frame_8->setObjectName(QString::fromUtf8("frame_8"));
+        frame_8->setEnabled(true);
         frame_8->setFrameShape(QFrame::StyledPanel);
         frame_8->setFrameShadow(QFrame::Raised);
         verticalLayout_32 = new QVBoxLayout(frame_8);
@@ -789,7 +790,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
