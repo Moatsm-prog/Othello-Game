@@ -71,10 +71,10 @@ void MainWindow::on_board_table_widget_cellClicked(int row, int column)
     if (cell_widget && cell_widget->cursor() == Qt::PointingHandCursor) // cursor on available move
     {
         // This is AI turn
-        // auto ab = AlphaBeta(*game_logic, difficulty);
-        // auto move = ab.alphaBetaSearch(this->turn);
-        // game_logic->update(this->turn, move.first, move.second);
-        // std::cout << move.first << " " << move.second << std::endl;
+        /*auto ab = AlphaBeta(*game_logic);
+        auto move = ab.alphaBetaSearch(this->turn,2);
+        game_logic->update(this->turn, move.first, move.second);
+        qDebug() << move.first << " " << move.second << "\n";*/
 
         ui->board_table_widget->removeCellWidget(row, column);
         game_logic->update(this->turn, row, column);

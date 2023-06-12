@@ -1,0 +1,10 @@
+release/main.o
+release/animatedradiobutton.o
+release/game_page_animation_handler.o
+release/mainwindow.o
+release/gamelogic.o
+release/ui_game_handler.o
+release/AlphaBeta.o
+release/qrc_resources.o
+release/moc_animatedradiobutton.o
+release/moc_mainwindow.o

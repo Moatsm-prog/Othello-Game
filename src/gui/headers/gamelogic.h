@@ -51,6 +51,7 @@ public:
     bool isGameOver();
     void debug();
     void reset();
+    std::vector<std::vector<int>> getBoard();
 };
 
 #endif // GAMELOGIC_H

@@ -2,7 +2,7 @@
 
 AlphaBeta::AlphaBeta(GameLogic gameLogic_) : gameLogic(gameLogic_)
 {
-    maxSearchTime = 5000; // Set the maximum search time to 5 seconds
+    maxSearchTime = 200; // Set the maximum search time to 5 seconds
 }
 
 std::pair<int, int> AlphaBeta::alphaBetaSearch(int playerInTurn, int difficulty)
@@ -36,6 +36,7 @@ std::pair<int, int> AlphaBeta::iterativeDeepeningSearch(int playerInTurn, int de
     int beta = std::numeric_limits<int>::max();
 
     std::vector<std::pair<int, int>> availableMoves = gameLogic.getAvailableMoves(playerInTurn);
+    availableMoves = sortBoardStatesByHeuristic(availableMoves, gameLogic, playerInTurn);
 
     for (const auto &move : availableMoves)
     {
@@ -74,6 +75,7 @@ int AlphaBeta::alphaBetaSearchRecursive(int playerInTurn, int depth, int alpha, 
     }
 
     std::vector<std::pair<int, int>> availableMoves = gameLogic.getAvailableMoves(playerInTurn);
+    availableMoves = sortBoardStatesByHeuristic(availableMoves, gameLogic, playerInTurn);
 
     // Maximizer
     if (playerInTurn == GameLogic::BLACK)
@@ -154,4 +156,36 @@ int AlphaBeta::evaluateBoard(int playerInTurn)
     // To add Heutritics to score (Make higher heuritics more important)
 
     return score;
+}
+
+bool AlphaBeta::compareHeuristics(const std::pair<std::pair<int, int>, int> &state1, const std::pair<std::pair<int, int>, int> &state2)
+{
+
+    return state1.second > state2.second;
+}
+
+std::vector<std::pair<int, int>> AlphaBeta::sortBoardStatesByHeuristic(std::vector<std::pair<int, int>> &moves, GameLogic gamelogic_, int playerInTurn)
+{
+    // Create a copy of the input board states
+
+    GameLogic gameLogicCopy = GameLogic(gamelogic_);
+    std::vector<std::pair<std::pair<int, int>, int>> sortedBoardStates;
+    HeuristicController heuristicController = HeuristicController(playerInTurn);
+
+    for (int i = 0; i < moves.size(); i++)
+    {
+        gameLogicCopy.update(playerInTurn, moves[i].first, moves[i].second);
+        sortedBoardStates.push_back(std::make_pair(moves[i], heuristicController.CornersHeuristic(gameLogicCopy.getBoard())));
+        gameLogicCopy = GameLogic(gamelogic_);
+    }
+
+    //std::sort(sortedBoardStates.begin(), sortedBoardStates.end(), compareHeuristics);
+
+    std::vector<std::pair<int, int>> sortedMoves;
+    for (int i = 0; i < sortedBoardStates.size(); i++)
+    {
+        sortedMoves.push_back(sortedBoardStates[i].first);
+    }
+
+    return sortedMoves;
 }
